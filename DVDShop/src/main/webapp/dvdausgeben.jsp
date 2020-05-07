@@ -10,15 +10,14 @@
                 <th>Löschen</th>
                 <th>Ändern</th>
             </tr>
-            <c:forEach var="gbEintrag" items="${gbList}">
+            <c:forEach var="gbEintrag" items="${dvdList}">
                 <tr>
                     <td>${gbEintrag.gid}</td>
                     <td>${gbEintrag.datum}</td>
                     <td>${gbEintrag.verfasser}</td>
                     <td>${gbEintrag.email}</td>
                     <td>${gbEintrag.text}</td>
-                    <td><a href="ctrldelete?gid=${gbEintrag.gid}">Löschen!</a></td>
-                    <td><a href="ctrlupdateselect?gid=${gbEintrag.gid}">Ändern!</a></td>
+                    
                 </tr>
             </c:forEach>
                 

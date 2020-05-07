@@ -38,13 +38,14 @@ public class CtrlSelect extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         ArrayList<DVD> dvdList = new ArrayList<>();
-       
+
         String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name, genre.name, fsk, kunde.kid, vorname, nachname, strasse, hausnummer, "
-                + "plz, kontonr, email from dvd, kunde, genre, sprache, dvd_sprache"
+                + "plz, kontonr, email from dvd, kunde, genre, sprache, dvd_sprache, dvd_kunde"
                 + "where dvd.gid=genre.gid"
-                + "and kunde.kid=dvd.kid"
+                + "and kunde.kid=dvd_kunde.kid"
+                + "and dvd_kunde.did=dvd.did"
                 + "and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid"
                 + "order by dvd.did";
 
@@ -54,26 +55,30 @@ public class CtrlSelect extends HttpServlet {
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-            
-            int did=0;
-            String titel=null;
-            int laenge=0;
-            int erscheinungsjahr=0;
-            ArrayList<String> sprache = null;
-            String genre=null;
-            int fsk=0;
-            Kunde kunde = null;
-            
 
             while (rs.next()) {
+                int did = 0;
+                String titel = null;
+                int laenge = 0;
+                int erscheinungsjahr = 0;
+                String sprache = null;
+                String genre = null;
+                int fsk = 0;
+                Kunde kunde = null;
                 
+                did = rs.getInt("did");
+                titel = rs.getString("titel");
+                laenge = rs.getInt("laenge");
+                erscheinungsjahr = rs.getInt("erscheinungsjahr");
+                sprache = rs.getString(5);
+                genre = rs.getString(6);
             }
             dbPool.releaseConnection(conn);
         } catch (SQLException e) {
         }
-        
+
         request.setAttribute("dvdList", dvdList);
-        RequestDispatcher view = request.getRequestDispatcher("gbausgeben.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("dvdausgeben.jsp");
         view.forward(request, response);
     }
 
