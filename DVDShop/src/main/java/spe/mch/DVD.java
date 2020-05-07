@@ -10,9 +10,8 @@ public class DVD {
     private ArrayList<String> sprache;
     private String genre;
     private int fsk;
-    private Kunde kunde;
 
-    public DVD(int did, String titel, int laenge, int erscheinungsjahr, ArrayList<String> sprache, String genre, int fsk, Kunde kunde) {
+    public DVD(int did, String titel, int laenge, int erscheinungsjahr, ArrayList<String> sprache, String genre, int fsk) {
         this.did = did;
         this.titel = titel;
         this.laenge = laenge;
@@ -20,7 +19,6 @@ public class DVD {
         this.sprache = sprache;
         this.genre = genre;
         this.fsk = fsk;
-        this.kunde = kunde;
     }
 
     public DVD() {
@@ -82,15 +80,5 @@ public class DVD {
         this.fsk = fsk;
     }
 
-    public Kunde getKunde() {
-        return kunde;
-    }
-
-    public void setKunde(Kunde kunde) {
-        this.kunde = kunde;
-    }
-
-   
-    
    
 }

@@ -7,11 +7,9 @@ package spe.mch;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,40 +39,50 @@ public class CtrlSelect extends HttpServlet {
 
         ArrayList<DVD> dvdList = new ArrayList<>();
 
-        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name, genre.name, fsk, kunde.kid, vorname, nachname, strasse, hausnummer, "
-                + "plz, kontonr, email from dvd, kunde, genre, sprache, dvd_sprache, dvd_kunde"
-                + "where dvd.gid=genre.gid"
-                + "and kunde.kid=dvd_kunde.kid"
-                + "and dvd_kunde.did=dvd.did"
-                + "and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid"
-                + "order by dvd.did";
+        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk from dvd, genre, sprache, dvd_sprache where dvd.gid=genre.gid and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid order by dvd.did";
 
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-
+        ArrayList<DVD> akku = new ArrayList<>();
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
 
+            int did = 0;
+            String titel = null;
+            int laenge = 0;
+            int erscheinungsjahr = 0;
+            ArrayList<String> sprache = new ArrayList<>();
+            String genre = null;
+            int fsk = 0;
+
             while (rs.next()) {
-                int did = 0;
-                String titel = null;
-                int laenge = 0;
-                int erscheinungsjahr = 0;
-                String sprache = null;
-                String genre = null;
-                int fsk = 0;
-                Kunde kunde = null;
-                
-                did = rs.getInt("did");
-                titel = rs.getString("titel");
-                laenge = rs.getInt("laenge");
-                erscheinungsjahr = rs.getInt("erscheinungsjahr");
-                sprache = rs.getString(5);
+
+                did = rs.getInt(1);
+                titel = rs.getString(2);
+                laenge = rs.getInt(3);
+                erscheinungsjahr = rs.getInt(4);
+                sprache.add(rs.getString(5));
                 genre = rs.getString(6);
+                fsk = rs.getInt(7);
+
+                DVD dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
+                akku.add(dvd);
             }
             dbPool.releaseConnection(conn);
+
+//            doppelte DVDs suchen
+            for (int i = 0; i < akku.size() - 1; i++) {
+                if (!akku.isEmpty() && akku.get(i).getDid() == akku.get(i + 1).getDid()) {
+                    akku.get(i).getSprache().add(akku.get(i + 1).getSprache().get(0));
+                    akku.remove(i + 1);
+                    i--;
+                }
+            }
+            dvdList = akku;
+
         } catch (SQLException e) {
+            response.getWriter().print(e.getMessage());
         }
 
         request.setAttribute("dvdList", dvdList);
