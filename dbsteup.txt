@@ -1,0 +1,38 @@
+create table dvd(
+did integer primary key generated always as identity,
+titel varchar(50) not null,
+laenge integer not null check(laenge>0),
+erscheinungsjahr integer not null,
+sprache integer not null,
+genre integer not null,
+fsk integer not null check(fsk in (0,6,12,16,18)),
+kid integer
+);
+
+create table kunde(
+kid integer primary key generated always as identity,
+vorname varchar(50) not null,
+nachname varchar(50) not null,
+straße varchar(50) not null,
+hausnummer varchar(50) not null,
+plz varchar(50) not null,
+kontonr varchar(50) not null,
+email varchar(50) not null
+);
+
+create table genre(
+gid integer primary key generated always as identity,
+name varchar(50) not null
+);
+
+
+create table sprache(
+sid integer primary key generated always as identity,
+name varchar(50) not null
+);
+
+create table dvd_sprache(
+did integer not null,
+sid integer not null,
+primary key(did, sid)
+);
