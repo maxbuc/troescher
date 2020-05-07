@@ -86,7 +86,7 @@ public class CtrlSelect extends HttpServlet {
         }
 
         request.setAttribute("dvdList", dvdList);
-        RequestDispatcher view = request.getRequestDispatcher("dvdausgeben.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("dvdausgeben_1.jsp");
         view.forward(request, response);
     }
 

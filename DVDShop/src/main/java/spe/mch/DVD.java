@@ -10,6 +10,7 @@ public class DVD {
     private ArrayList<String> sprache;
     private String genre;
     private int fsk;
+    private boolean verliehen;
 
     public DVD(int did, String titel, int laenge, int erscheinungsjahr, ArrayList<String> sprache, String genre, int fsk) {
         this.did = did;
@@ -80,5 +81,14 @@ public class DVD {
         this.fsk = fsk;
     }
 
+    public boolean isVerliehen() {
+        return verliehen;
+    }
+
+    public void setVerliehen(boolean verliehen) {
+        this.verliehen = verliehen;
+    }
+
+    
    
 }
