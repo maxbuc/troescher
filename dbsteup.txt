@@ -24,14 +24,15 @@ straße varchar(50) not null,
 hausnummer varchar(50) not null,
 plz varchar(50) not null,
 kontonr varchar(50) not null,
-email varchar(50) not null
+email varchar(50) not null,
+passwort varchar(50) not null
 );
 
 create table dvd_kunde(
 did integer,
 kid integer,
-primary key (did, kid),
 ausgeliehen date not null,
+primary key (did, kid, ausgeliehen),
 zurueck date
 );
 
@@ -56,10 +57,10 @@ insert into sprache (name) values('deutsch');
 insert into sprache (name) values('englisch');
 insert into sprache (name) values('spanisch');
 
-insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email) 
-values ('Hans', 'Meier', 'Schulgasse', '23', '56723', 'DE123456789', 'hans@meier.de');
-insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email) 
-values ('Peter', 'Huber', 'Bahnhofplatz', '4', '81465', 'DE987654321', 'peter@huber.de');
+insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort) 
+values ('Hans', 'Meier', 'Schulgasse', '23', '56723', 'DE123456789', 'hans@meier.de', '123');
+insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort) 
+values ('Peter', 'Huber', 'Bahnhofplatz', '4', '81465', 'DE987654321', 'peter@huber.de', '123');
 
 insert into genre (name) values ('Horror');
 insert into genre (name) values ('Sci-Fi');
@@ -78,4 +79,6 @@ insert into dvd_sprache values(2,2);
 insert into dvd_sprache values(2,3);
 
 insert into dvd_kunde values(1,1,'2020-05-06', null);
+insert into dvd_kunde values(1,1,'2019-05-06', '2020-01-01');
+insert into dvd_kunde values(1,1,'2020-03-23', '2020-04-16');
 insert into dvd_kunde values(2,1,'2020-05-04', '2020-05-06');

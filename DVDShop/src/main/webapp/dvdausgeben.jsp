@@ -5,7 +5,6 @@
                 <th>Nr.</th>
                 <th>Titel</th>
                 <th>Länge</th>
-                <th>Erscheinungsjahr</th>
                 <th>FSK</th>
                 <th>Details</th>
           
@@ -15,7 +14,6 @@
                     <td>${dvd.did}</td>
                     <td>${dvd.titel}</td>
                     <td>${dvd.laenge}</td>
-                    <td>${dvd.erscheinungsjahr}</td>
                     <td>${dvd.fsk}</td>
                     <td><a href="ctrlselectdetail?did=${dvd.did}">Details</a></td>
                     
