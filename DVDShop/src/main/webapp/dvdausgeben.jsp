@@ -13,7 +13,7 @@
             <c:forEach var="dvd" items="${dvdList}">
                 <tr>
                     <td>${dvd.did}</td>
-                    <td>${dvd.Titel}</td>
+                    <td>${dvd.titel}</td>
                     <td>${dvd.laenge}</td>
                     <td>${dvd.erscheinungsjahr}</td>
                     <td>${dvd.fsk}</td>
