@@ -50,7 +50,7 @@ public class CtrlLogIn extends HttpServlet {
             ResultSet rs = pstm.executeQuery();
             rs.next();
 
-            if (rs.getString("passwort") == passwort) {
+            if (rs.getString("passwort").equals(passwort)) {
                 view = request.getRequestDispatcher("ctrlselect");
             }else{
                 view = request.getRequestDispatcher("index.html");// hier muss der Link zur LogIn Seite hin
