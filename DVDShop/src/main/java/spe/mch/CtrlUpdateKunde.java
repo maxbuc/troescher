@@ -61,7 +61,7 @@ public class CtrlUpdateKunde extends HttpServlet {
         Connection conn = dbPool.getConnection();
 
         try {
-            PreparedStatement pstm = conn.prepareStatement(sql);
+            PreparedStatement pstm = conn.prepareStatement("update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?");
             pstm.setString(1, kunde.getVorname());
             pstm.setString(2, kunde.getNachname());
             pstm.setString(3, kunde.getStrasse());
@@ -80,7 +80,7 @@ public class CtrlUpdateKunde extends HttpServlet {
             view.forward(request, response);
         }
 
-        RequestDispatcher view = request.getRequestDispatcher("kunde_bearbeiten.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("ctrlselect");
         view.forward(request, response);
     }
 
