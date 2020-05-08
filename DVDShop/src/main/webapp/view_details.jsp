@@ -16,12 +16,19 @@
         <table>
             <tr>
                 <th>Nr.</th>
-                
+                <th>Nr.</th>
+                <th>Titel</th>
+                <th>Länge</th>
+                <th>Erscheinungsjahr</th>
+                <th>FSK</th>
             </tr>
             
                 <tr>
                     <td>${dvd.titel}</td>
-                   
+                    <td>${dvd.Titel}</td>
+                    <td>${dvd.laenge}</td>
+                    <td>${dvd.erscheinungsjahr}</td>
+                    <td>${dvd.fsk}</td>   
                     
                 </tr>
             

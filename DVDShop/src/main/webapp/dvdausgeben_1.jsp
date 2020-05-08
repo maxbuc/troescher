@@ -1,5 +1,5 @@
 <%-- 
-    Author     : Wolfgang Tröscher, SPE München
+    Author     : MIP
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +8,7 @@
     <head>
         <link rel="stylesheet" href="mStyle.css" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>G&auml;stebuch</title>
+        <title>DVD-Shop</title>
     </head>
     <body>
 
@@ -19,15 +19,23 @@
                 <li><a href="impressum.jsp">Impressum</a></li>  
             </ul>
         </nav>
-        <h1>Unser Gästebuch</h1>
+        <h1>Unser DVD-Shop</h1>
         <table>
             <tr>
                 <th>Nr.</th>
+                <th>Titel</th>
+                <th>Länge</th>
+                <th>Erscheinungsjahr</th>
+                <th>FSK</th>
                 <th>Details</th>
             </tr>
             <c:forEach var="dvd" items="${dvdList}">
                 <tr>
+                    <td>${dvd.did}</td>
                     <td>${dvd.titel}</td>
+                    <td>${dvd.laenge}</td>
+                    <td>${dvd.erscheinungsjahr}</td>
+                    <td>${dvd.fsk}</td>
                     <td><a href="ctrlselectdetail?did=${dvd.did}">Details</a></td>
 
                 </tr>

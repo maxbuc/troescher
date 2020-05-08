@@ -1,22 +1,23 @@
-<%@include file="WEB-INF/jspf/header.jspf" %>
-        <h1>Unser Gästebuch</h1>
-        <table>
+<%@include file="WEB-INF/jspf/header.jspf" %>   
+<h1>Unser DVD-Shop</h1>
+        <table border="1">
             <tr>
                 <th>Nr.</th>
-                <th>Datum</th>
-                <th>Verfasser</th>
-                <th>E-Mail</th>
-                <th>Text</th>
-                <th>Löschen</th>
-                <th>Ändern</th>
+                <th>Titel</th>
+                <th>Länge</th>
+                <th>Erscheinungsjahr</th>
+                <th>FSK</th>
+                <th>Details</th>
+          
             </tr>
-            <c:forEach var="gbEintrag" items="${dvdList}">
+            <c:forEach var="dvd" items="${dvdList}">
                 <tr>
-                    <td>${gbEintrag.gid}</td>
-                    <td>${gbEintrag.datum}</td>
-                    <td>${gbEintrag.verfasser}</td>
-                    <td>${gbEintrag.email}</td>
-                    <td>${gbEintrag.text}</td>
+                    <td>${dvd.did}</td>
+                    <td>${dvd.Titel}</td>
+                    <td>${dvd.laenge}</td>
+                    <td>${dvd.erscheinungsjahr}</td>
+                    <td>${dvd.fsk}</td>
+                    <td><a href="ctrlselectdetail?did=${dvd.did}">Details</a></td>
                     
                 </tr>
             </c:forEach>
