@@ -6,7 +6,7 @@
                 <th>Titel</th>
                 <th>Länge</th>
                 <th>FSK</th>
-                <th>Details</th>
+                <th>${kunde.email}</th>
           
             </tr>
             <c:forEach var="dvd" items="${dvdList}">

@@ -6,7 +6,8 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -15,14 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlLogIn", urlPatterns = {"/ctrllogin"})
-public class CtrlLogIn extends HttpServlet {
+@WebServlet(name = "CtrlUpdateKunde", urlPatterns = {"/ctrlupdatekunde"})
+public class CtrlUpdateKunde extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,46 +35,43 @@ public class CtrlLogIn extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String mUsername = request.getParameter("username");
-        String mPasswort = request.getParameter("passwort");
-
+        
+        String sql = "update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?";
+        
+        String vorname=request.getParameter("vorname");
+        String nachname=request.getParameter("nachname");
+        String strasse=request.getParameter("strasse");
+        String hausnummer=request.getParameter("hausnummer");
+        String plz=request.getParameter("plz");
+        String kontonr=request.getParameter("kontonr");
+        String email=request.getParameter("email");
+        String passwort=request.getParameter("passwort");
+        int kid = Integer.parseInt(request.getParameter("passwort"));
+        
+        
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-
-        String sql = "select * from kunde where email=?";
-
-        RequestDispatcher view = null;
-
-        HttpSession session = request.getSession();
-
-        try {
+        
+        try{
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, mUsername);
-            ResultSet rs = pstm.executeQuery();
-            rs.next();
-
-            int kid = rs.getInt("kid");
-            String vorname = rs.getString("vorname");
-            String nachname = rs.getString("nachname");
-            String strasse = rs.getString("strasse");
-            String hausnummer = rs.getString("hausnummer");
-            String plz = rs.getString("plz");
-            String kontonr = rs.getString("kontonr");
-            String email = rs.getString("email");
-            String passwort = rs.getString("passwort");
-
-            if (rs.getString("passwort").equals(mPasswort)) {
-
-                Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                session.setAttribute("kunde", kunde);
-                view = request.getRequestDispatcher("ctrlselect");
-            } else {
-                view = request.getRequestDispatcher("index.html");// hier muss der Link zur LogIn Seite hin
-            }
+            pstm.setString(1, vorname);
+            pstm.setString(2, nachname);
+            pstm.setString(3, strasse);
+            pstm.setString(4, hausnummer);
+            pstm.setString(5, plz);
+            pstm.setString(6, kontonr);
+            pstm.setString(7, email);
+            pstm.setString(8, passwort);
+            pstm.setInt(9, kid);
+            
+            pstm.executeUpdate();
+            conn.commit();
             dbPool.releaseConnection(conn);
-        } catch (SQLException ex) {
-            view = request.getRequestDispatcher("index.html");//hier muss der Link zur LogIn Seite hin
+        }catch(SQLException e){
+            response.getWriter().print("SQLFEHLER");
         }
+        
+        RequestDispatcher view = request.getRequestDispatcher("ctrlselect");
         view.forward(request, response);
     }
 

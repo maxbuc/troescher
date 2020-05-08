@@ -16,6 +16,6 @@
             <ul>
                 <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
                 <li><a href="ctrlselect">DVDs anzeigen</a></li>
-                <li><a href="impressum.jsp">Impressum</a></li>  
+                <li><a href="kunde_bearbeiten.jsp">${kunde.email}, bearbeiten Sie Ihr Konto</a></li>  
             </ul>
         </nav>

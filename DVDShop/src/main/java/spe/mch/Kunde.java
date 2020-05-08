@@ -9,8 +9,9 @@ public class Kunde {
     private String plz;
     private String kontonr;
     private String email;
+    private String passwort;
 
-    public Kunde(int kid, String vorname, String nachname, String strasse, String hausnummer, String plz, String kontonr, String email) {
+    public Kunde(int kid, String vorname, String nachname, String strasse, String hausnummer, String plz, String kontonr, String email, String passwort) {
         this.kid = kid;
         this.vorname = vorname;
         this.nachname = nachname;
@@ -19,6 +20,7 @@ public class Kunde {
         this.plz = plz;
         this.kontonr = kontonr;
         this.email = email;
+        this.passwort = passwort;
     }
 
     public Kunde() {
@@ -87,6 +89,15 @@ public class Kunde {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPasswort() {
+        return passwort;
+    }
+
+    public void setPasswort(String passwort) {
+        this.passwort = passwort;
+    }
+    
     
     
 }
