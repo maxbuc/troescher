@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,43 +36,51 @@ public class CtrlUpdateKunde extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String sql = "update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?";
+
+        Kunde kunde=null;
         
-        String vorname=request.getParameter("vorname");
-        String nachname=request.getParameter("nachname");
-        String strasse=request.getParameter("strasse");
-        String hausnummer=request.getParameter("hausnummer");
-        String plz=request.getParameter("plz");
-        String kontonr=request.getParameter("kontonr");
-        String email=request.getParameter("email");
-        String passwort=request.getParameter("passwort");
+        String vorname = request.getParameter("vorname");
+        String nachname = request.getParameter("nachname");
+        String strasse = request.getParameter("strasse");
+        String hausnummer = request.getParameter("hausnummer");
+        String plz = request.getParameter("plz");
+        String kontonr = request.getParameter("kontonr");
+        String email = request.getParameter("email");
+        String passwort = request.getParameter("passwort");
         int kid = Integer.parseInt(request.getParameter("passwort"));
         
+        kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
         
+        HttpSession session = request.getSession();
+        session.removeAttribute("kunde");
+        session.setAttribute("kunde", kunde);
+
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-        
-        try{
+
+        try {
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, vorname);
-            pstm.setString(2, nachname);
-            pstm.setString(3, strasse);
-            pstm.setString(4, hausnummer);
-            pstm.setString(5, plz);
-            pstm.setString(6, kontonr);
-            pstm.setString(7, email);
-            pstm.setString(8, passwort);
-            pstm.setInt(9, kid);
-            
+            pstm.setString(1, kunde.getVorname());
+            pstm.setString(2, kunde.getNachname());
+            pstm.setString(3, kunde.getStrasse());
+            pstm.setString(4, kunde.getHausnummer());
+            pstm.setString(5, kunde.getPlz());
+            pstm.setString(6, kunde.getKontonr());
+            pstm.setString(7, kunde.getEmail());
+            pstm.setString(8, kunde.getPasswort());
+            pstm.setInt(9, kunde.getKid());
+
             pstm.executeUpdate();
             conn.commit();
             dbPool.releaseConnection(conn);
-        }catch(SQLException e){
-            response.getWriter().print("SQLFEHLER");
+        } catch (SQLException e) {
+            RequestDispatcher view = request.getRequestDispatcher("index.html");
+            view.forward(request, response);
         }
-        
-        RequestDispatcher view = request.getRequestDispatcher("ctrlselect");
+
+        RequestDispatcher view = request.getRequestDispatcher("kunde_bearbeiten.jsp");
         view.forward(request, response);
     }
 
