@@ -6,23 +6,25 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlLogIn", urlPatterns = {"/ctrllogin"})
-public class CtrlLogIn extends HttpServlet {
+@WebServlet(name = "CtrlDeleteSelectDVD", urlPatterns = {"/ctrldeleteselectdvd"})
+public class CtrlDeleteSelectDVD extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,53 +37,35 @@ public class CtrlLogIn extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String mUsername = request.getParameter("username");
-        mUsername = mUsername.replaceFirst("%40", "@");
-        String mPasswort = request.getParameter("passwort");
-        RequestDispatcher view = null;
         
-        if (mUsername.equals("admin@admin.de") && mPasswort.equals("admin")) {
-            view = request.getRequestDispatcher("ctrlselectadmin");
-        } else {
-
+            int did = Integer.parseInt(request.getParameter("did"));
+            
             ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
             Connection conn = dbPool.getConnection();
-
-            String sql = "select * from kunde where email=?";
-
-            HttpSession session = request.getSession();
-
-            try {
-                PreparedStatement pstm = conn.prepareStatement(sql);
-                pstm.setString(1, mUsername);
-                ResultSet rs = pstm.executeQuery();
-                rs.next();
-
-                int kid = rs.getInt("kid");
-                String vorname = rs.getString("vorname");
-                String nachname = rs.getString("nachname");
-                String strasse = rs.getString("strasse");
-                String hausnummer = rs.getString("hausnummer");
-                String plz = rs.getString("plz");
-                String kontonr = rs.getString("kontonr");
-                String email = rs.getString("email");
-                String passwort = rs.getString("passwort");
-
-                if (rs.getString("passwort").equals(mPasswort)) {
-
-                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    session.setAttribute("kunde", kunde);
-                    view = request.getRequestDispatcher("ctrlselect");
-                } else {
-                    view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin
-                }
-                dbPool.releaseConnection(conn);
-            } catch (SQLException ex) {
-                view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
-            }
+        try {    
+            String sql = "delete from dvd where did = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, did);
+            pstm.executeUpdate();
+            
+            sql = "delete from dvd_sprache where did = ?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, did);
+            pstm.executeUpdate();
+            
+            sql = "delete from dvd_kunde where did = ?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, did);
+            pstm.executeUpdate();
+            
+            dbPool.releaseConnection(conn);
+            RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
+            view.forward(request, response);
+        
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
         }
-        view.forward(request, response);
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

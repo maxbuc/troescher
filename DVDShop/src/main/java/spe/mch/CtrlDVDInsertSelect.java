@@ -7,22 +7,20 @@ package spe.mch;
 
 import java.io.IOException;
 import java.sql.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlLogIn", urlPatterns = {"/ctrllogin"})
-public class CtrlLogIn extends HttpServlet {
+@WebServlet(name = "CtrlDVDInsertSelect", urlPatterns = {"/ctrldvdinsertselect"})
+public class CtrlDVDInsertSelect extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,53 +33,39 @@ public class CtrlLogIn extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String mUsername = request.getParameter("username");
-        mUsername = mUsername.replaceFirst("%40", "@");
-        String mPasswort = request.getParameter("passwort");
-        RequestDispatcher view = null;
-        
-        if (mUsername.equals("admin@admin.de") && mPasswort.equals("admin")) {
-            view = request.getRequestDispatcher("ctrlselectadmin");
-        } else {
+        String sql = "select * from genre";
+        String sql2 = "select * from sprache";
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
 
-            ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-            Connection conn = dbPool.getConnection();
+        ArrayList<Genre> genreList = new ArrayList<>();
+        ArrayList<Sprache> spracheList = new ArrayList<>();
 
-            String sql = "select * from kunde where email=?";
-
-            HttpSession session = request.getSession();
-
-            try {
-                PreparedStatement pstm = conn.prepareStatement(sql);
-                pstm.setString(1, mUsername);
-                ResultSet rs = pstm.executeQuery();
-                rs.next();
-
-                int kid = rs.getInt("kid");
-                String vorname = rs.getString("vorname");
-                String nachname = rs.getString("nachname");
-                String strasse = rs.getString("strasse");
-                String hausnummer = rs.getString("hausnummer");
-                String plz = rs.getString("plz");
-                String kontonr = rs.getString("kontonr");
-                String email = rs.getString("email");
-                String passwort = rs.getString("passwort");
-
-                if (rs.getString("passwort").equals(mPasswort)) {
-
-                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    session.setAttribute("kunde", kunde);
-                    view = request.getRequestDispatcher("ctrlselect");
-                } else {
-                    view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin
-                }
-                dbPool.releaseConnection(conn);
-            } catch (SQLException ex) {
-                view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                genreList.add(new Genre(rs.getInt("gid"), rs.getString("name")));
             }
-        }
-        view.forward(request, response);
+            
+            
+            pstm = conn.prepareStatement(sql2);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                spracheList.add(new Sprache(rs.getInt(1), rs.getString(2)));
+            }
 
+            dbPool.releaseConnection(conn);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+        
+        request.setAttribute("genreList", genreList);
+        request.setAttribute("spracheList", spracheList);
+        
+                
+        RequestDispatcher view = request.getRequestDispatcher("dvdinsert.jsp");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

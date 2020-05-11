@@ -82,3 +82,448 @@ insert into dvd_kunde values(1,1,'2020-05-06', null);
 insert into dvd_kunde values(1,1,'2019-05-06', '2020-01-01');
 insert into dvd_kunde values(1,1,'2020-03-23', '2020-04-16');
 insert into dvd_kunde values(2,1,'2020-05-04', '2020-05-06');
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Get Out', 104, 2017, 1, 16);
+insert into dvd_sprache values(3,1);
+insert into dvd_sprache values(3,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das Dorf der Verdammten', 77, 1960, 1, 16);
+insert into dvd_sprache values(4,1);
+insert into dvd_sprache values(4,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Dead Zone - Der Attentäter', 105, 1984, 1, 18);
+insert into dvd_sprache values(5,1);
+insert into dvd_sprache values(5,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Zombie - Dawn Of The Dead', 115, 1979, 1, 18);
+insert into dvd_sprache values(6,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Bis das Blut gefriert', 112, 1964, 1, 16);
+insert into dvd_sprache values(7,1);
+insert into dvd_sprache values(7,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Dracula', 75, 1931, 1, 18);
+insert into dvd_sprache values(8,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('American Werewolf', 97, 1982, 1, 16);
+insert into dvd_sprache values(9,1);
+insert into dvd_sprache values(9,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Augen ohne Gesicht', 98, 1960, 1, 16);
+insert into dvd_sprache values(10,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Possession', 125, 2011, 1, 16);
+insert into dvd_sprache values(11,1);
+insert into dvd_sprache values(11,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Katzenmenschen', 71, 2010, 1, 12);
+insert into dvd_sprache values(12,1);
+insert into dvd_sprache values(12,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Martyrs', 100, 2009, 1, 0);
+insert into dvd_sprache values(13,1);
+insert into dvd_sprache values(13,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Fliege', 96, 1987, 1, 18);
+insert into dvd_sprache values(14,1);
+insert into dvd_sprache values(14,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Ring', 110, 2003, 1, 16);
+insert into dvd_sprache values(15,1);
+insert into dvd_sprache values(15,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Tetsuo: The Iron Man', 67, 1988, 1, 16);
+insert into dvd_sprache values(16,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Freaks', 62, 1932, 1, 16);
+insert into dvd_sprache values(17,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Teufel', 111, 1971, 1, 16);
+insert into dvd_sprache values(18,1);
+insert into dvd_sprache values(18,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Der Unsichtbare', 71, 1933, 1, 16);
+insert into dvd_sprache values(19,1);
+insert into dvd_sprache values(19,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Ein Kind zu töten...', 107, 1976, 1, 16);
+insert into dvd_sprache values(20,1);
+insert into dvd_sprache values(20,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Der unheimliche Gast', 99, 1944, 1, 0);
+insert into dvd_sprache values(21,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Blutige Seide', 88, 1964, 1, 18);
+insert into dvd_sprache values(22,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Rosemaries Baby', 136, 1968, 1, 16);
+insert into dvd_sprache values(23,1);
+insert into dvd_sprache values(23,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Nightmare - Mörderische Träume', 91, 1984, 1, 16);
+insert into dvd_sprache values(24,1);
+insert into dvd_sprache values(24,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('The Texas Chainsaw Massacre', 83, 1978, 1, 18);
+insert into dvd_sprache values(25,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Zwei Schwestern', 119, 2003, 1, 16);
+insert into dvd_sprache values(26,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Schloss des Schreckens', 99, 1961, 1, 16);
+insert into dvd_sprache values(27,1);
+insert into dvd_sprache values(27,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Hellraiser - Das Tor zur Hölle', 93, 1987, 1, 16);
+insert into dvd_sprache values(28,1);
+insert into dvd_sprache values(28,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Tanz der Teufel 2', 85, 1987, 1, 16);
+insert into dvd_sprache values(29,1);
+insert into dvd_sprache values(29,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Frankenstein', 67, 1931, 1, 16);
+insert into dvd_sprache values(30,1);
+insert into dvd_sprache values(30,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Halloween - Die Nacht des Grauens', 91, 1978, 1, 16);
+insert into dvd_sprache values(31,1);
+insert into dvd_sprache values(31,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('The Seventh Victim', 71, 1943, 1, 0);
+insert into dvd_sprache values(32,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das Ding aus einer anderen Welt', 108, 1982, 1, 16);
+insert into dvd_sprache values(33,1);
+insert into dvd_sprache values(33,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Carrie', 98, 1976, 1, 16);
+insert into dvd_sprache values(34,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Körperfresser kommen', 115, 1978, 1, 16);
+insert into dvd_sprache values(35,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Der weiße Hai', 124, 1975, 1, 16);
+insert into dvd_sprache values(36,1);
+insert into dvd_sprache values(36,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('King Kong und die weiße Frau', 100, 1933, 1, 6);
+insert into dvd_sprache values(37,1);
+insert into dvd_sprache values(37,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das Cabinet des Dr. Caligari', 77, 1920, 1, 6);
+insert into dvd_sprache values(38,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Eraserhead', 89, 1977, 1, 16);
+insert into dvd_sprache values(39,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Vögel', 120, 1962, 1, 16);
+insert into dvd_sprache values(40,1);
+insert into dvd_sprache values(40,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Augen der Angst', 101, 1960, 1, 12);
+insert into dvd_sprache values(41,1);
+insert into dvd_sprache values(41,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Hereditary', 126, 2018, 1, 16);
+insert into dvd_sprache values(42,1);
+insert into dvd_sprache values(42,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Der Exorzist', 121, 1973, 1, 16);
+insert into dvd_sprache values(43,1);
+insert into dvd_sprache values(43,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Wenn die Gondeln Trauer tragen', 112, 1973, 1, 16);
+insert into dvd_sprache values(44,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Scream', 110, 1996, 1, 16);
+insert into dvd_sprache values(45,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Suspiria', 95, 1977, 1, 16);
+insert into dvd_sprache values(46,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Nosferatu - Eine Symphonie des Grauens', 94, 1922, 1, 12);
+insert into dvd_sprache values(47,1);
+insert into dvd_sprache values(47,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Nacht der lebenden Toten', 96, 1968, 1, 16);
+insert into dvd_sprache values(48,1);
+insert into dvd_sprache values(48,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Teuflischen', 114, 1955, 1, 16);
+insert into dvd_sprache values(49,1);
+insert into dvd_sprache values(49,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Alien', 116, 1979, 1, 16);
+insert into dvd_sprache values(50,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Psycho', 109, 1960, 1, 12);
+insert into dvd_sprache values(51,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Shining', 143, 1980, 1, 16);
+insert into dvd_sprache values(52,1);
+insert into dvd_sprache values(52,2);
+
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Inception', 148, 2010, 2, 12);
+insert into dvd_sprache values(53,1);
+insert into dvd_sprache values(53,2);
+insert into dvd_sprache values(53,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Ghostbusters - Die Geisterjäger', 107, 1984, 2, 12);
+insert into dvd_sprache values(54,1);
+insert into dvd_sprache values(54,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Die Totale Erinnerung - Total Recall', 113, 1990, 2, 18);
+insert into dvd_sprache values(55,1);
+insert into dvd_sprache values(55,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Stalker', 154, 1979, 2, 12);
+insert into dvd_sprache values(56,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Und täglich grüßt das Murmeltier', 101, 1993, 2, 6);
+insert into dvd_sprache values(57,1);
+insert into dvd_sprache values(57,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Iron Man', 126, 2008, 2, 12);
+insert into dvd_sprache values(58,1);
+insert into dvd_sprache values(58,2);
+insert into dvd_sprache values(58,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Gattaca', 101, 1997, 2, 12);
+insert into dvd_sprache values(59,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('28 Days Later', 112, 2002, 2, 18);
+insert into dvd_sprache values(60,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das wandelnde Schloss', 120, 2004, 2, 6);
+insert into dvd_sprache values(61,1);
+insert into dvd_sprache values(61,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Pi', 85, 1998, 2, 12);
+insert into dvd_sprache values(62,1);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Blade Runner 2049', 163, 2017, 2, 12);
+insert into dvd_sprache values(63,1);
+insert into dvd_sprache values(63,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Gravity', 91, 2013, 2, 16);
+insert into dvd_sprache values(64,1);
+insert into dvd_sprache values(64,2);
+insert into dvd_sprache values(64,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Starship Troopers', 124, 1997, 2, 18);
+insert into dvd_sprache values(65,1);
+insert into dvd_sprache values(65,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Zombieland', 88, 2009, 2, 16);
+insert into dvd_sprache values(66,1);
+insert into dvd_sprache values(66,2);
+insert into dvd_sprache values(66,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('X-Men: Zukunft ist Vergangenheit', 131, 2014, 2, 12);
+insert into dvd_sprache values(67,1);
+insert into dvd_sprache values(67,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('District 9', 112, 2009, 2, 16);
+insert into dvd_sprache values(68,1);
+insert into dvd_sprache values(68,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Videodrome', 89, 1983, 2, 18);
+insert into dvd_sprache values(69,1);
+insert into dvd_sprache values(69,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Blade Runner', 112, 1982, 2, 16);
+insert into dvd_sprache values(70,1);
+insert into dvd_sprache values(70,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das Imperium schlägt zurück', 125, 1980, 2, 12);
+insert into dvd_sprache values(71,1);
+insert into dvd_sprache values(71,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Matrix', 136, 1999, 2, 16);
+insert into dvd_sprache values(72,1);
+insert into dvd_sprache values(72,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Terminator 2 - Tag der Abrechnung', 132, 1991, 2, 16);
+insert into dvd_sprache values(73,1);
+insert into dvd_sprache values(73,2);
+insert into dvd_sprache values(73,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Krieg der Sterne', 127, 1977, 2, 12);
+insert into dvd_sprache values(74,1);
+insert into dvd_sprache values(74,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Zurück in die Zukunft', 111, 1985, 2, 12);
+insert into dvd_sprache values(75,1);
+insert into dvd_sprache values(75,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Brazil', 130, 1985, 3, 18);
+insert into dvd_sprache values(76,1);
+insert into dvd_sprache values(76,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Men in Black 3', 106, 2012, 3, 12);
+insert into dvd_sprache values(77,1);
+insert into dvd_sprache values(77,2);
+insert into dvd_sprache values(77,3);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Galaxy Quest - Planlos durchs Weltall', 102, 1999, 3, 12);
+insert into dvd_sprache values(78,1);
+insert into dvd_sprache values(78,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Per Anhalter durch die Galaxis', 109, 2005, 3, 6);
+insert into dvd_sprache values(79,1);
+insert into dvd_sprache values(79,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Men in Black', 98, 1997, 3, 12);
+insert into dvd_sprache values(80,1);
+insert into dvd_sprache values(80,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Alles eine Frage der Zeit', 123, 2013, 3, 0);
+insert into dvd_sprache values(81,1);
+insert into dvd_sprache values(81,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('The Worlds End', 109, 2013, 3, 12);
+insert into dvd_sprache values(82,1);
+insert into dvd_sprache values(82,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Spaceballs', 96, 1987, 3, 6);
+insert into dvd_sprache values(83,1);
+insert into dvd_sprache values(83,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Ant-Man', 117, 2015, 3, 12);
+insert into dvd_sprache values(84,1);
+insert into dvd_sprache values(84,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Im Land der Raketenwürmer', 96, 1990, 3, 16);
+insert into dvd_sprache values(85,1);
+insert into dvd_sprache values(85,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das ist das Ende', 107, 2013, 4, 16);
+insert into dvd_sprache values(86,1);
+insert into dvd_sprache values(86,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Robot and Frank', 89, 2012, 4, 0);
+insert into dvd_sprache values(87,1);
+insert into dvd_sprache values(87,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Dark Star - Finsterer Stern', 79, 1974, 4, 6);
+insert into dvd_sprache values(88,1);
+insert into dvd_sprache values(88,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Warm Bodies', 99, 2013, 4, 12);
+insert into dvd_sprache values(89,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Bill & Teds verrückte Reise durch die Zeit', 90, 1989, 4, 6);
+insert into dvd_sprache values(90,1);
+insert into dvd_sprache values(90,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Das Millionenspiel', 96, 1970, 4, 12);
+insert into dvd_sprache values(91,1);
+insert into dvd_sprache values(91,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Partypool - Radio Zombie', 99, 2008, 4, 16);
+insert into dvd_sprache values(92,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Kaboom', 83, 2010, 4, 16);
+insert into dvd_sprache values(93,1);
+insert into dvd_sprache values(93,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Save the green Planet', 118, 2003, 4, 18);
+insert into dvd_sprache values(94,2);
+
+insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
+values('Cocoon', 117, 1985, 4, 6);
+insert into dvd_sprache values(95,2);
