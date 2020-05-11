@@ -12,27 +12,37 @@ body {
 }
 
 .mittig {
-	position: fixed;
-	left: 35%;
-	top:50%;
-	right:65%
+	
+	margin-left: 450px;
+	margin-right: 200px;
+	margin-top:10px; 
+	margin-right:100px;
+	line-height: 40px;
+
 	
 }
 
-input[type=submit] /*Button Suche*/{
+input[type=submit] /*Button Login*/{
   width: 7%;
-  position: fixed;
-  top: 10%;
-  left: 45%;
+  position: relative;
   background-color: #009999;
+  margin-top: 10px;
+  left:47%;
   color: white;
-  padding: 8px 10px; /*Größe, Breite,Länge*/
+  padding: 6px 10px; /*Größe, Breite,Länge*/
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-family: "Teko";
+  font-size: 20px;
 }
 
 input[type=submit]:hover {
   background-color: #48D1CC;/*Farbe wenn man über suchebutton fährt*/   
+}
+
+.einruecken {
+	text-indent: 100px;
+	display: inline;
 }
 
