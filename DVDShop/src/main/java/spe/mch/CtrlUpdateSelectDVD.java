@@ -6,23 +6,25 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlLogIn", urlPatterns = {"/ctrllogin"})
-public class CtrlLogIn extends HttpServlet {
+@WebServlet(name = "CtrlUpdateSelectDVD", urlPatterns = {"/ctrlupdateselectdvd"})
+public class CtrlUpdateSelectDVD extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,53 +37,52 @@ public class CtrlLogIn extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String mUsername = request.getParameter("username");
-        mUsername = mUsername.replaceFirst("%40", "@");
-        String mPasswort = request.getParameter("passwort");
-        RequestDispatcher view = null;
-        
-        if (mUsername.equals("admin@admin.de") && mPasswort.equals("admin")) {
-            view = request.getRequestDispatcher("ctrlselectadmin");
-        } else {
+        int did = Integer.parseInt(request.getParameter("did"));
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
 
-            ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-            Connection conn = dbPool.getConnection();
+        DVD dvd = null;
 
-            String sql = "select * from kunde where email=?";
+        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
+                + "from dvd, genre, sprache, dvd_sprache "
+                + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did "
+                + "and dvd_sprache.sid=sprache.sid and dvd.did=?";
 
-            HttpSession session = request.getSession();
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, Integer.parseInt(request.getParameter("did")));
 
-            try {
-                PreparedStatement pstm = conn.prepareStatement(sql);
-                pstm.setString(1, mUsername);
-                ResultSet rs = pstm.executeQuery();
-                rs.next();
+            ResultSet rs = pstm.executeQuery();
 
-                int kid = rs.getInt("kid");
-                String vorname = rs.getString("vorname");
-                String nachname = rs.getString("nachname");
-                String strasse = rs.getString("strasse");
-                String hausnummer = rs.getString("hausnummer");
-                String plz = rs.getString("plz");
-                String kontonr = rs.getString("kontonr");
-                String email = rs.getString("email");
-                String passwort = rs.getString("passwort");
+            String titel = null;
+            int laenge = 0;
+            int erscheinungsjahr = 0;
+            ArrayList<String> sprache = new ArrayList<>();
+            String genre = null;
+            int fsk = 0;
 
-                if (rs.getString("passwort").equals(mPasswort)) {
+            rs.next();
 
-                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    session.setAttribute("kunde", kunde);
-                    view = request.getRequestDispatcher("ctrlselect");
-                } else {
-                    view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin
-                }
-                dbPool.releaseConnection(conn);
-            } catch (SQLException ex) {
-                view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
+            titel = rs.getString(2);
+            laenge = rs.getInt(3);
+            erscheinungsjahr = rs.getInt(4);
+            sprache.add(rs.getString(5));
+            genre = rs.getString(6);
+            fsk = rs.getInt(7);
+
+            dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
+
+            while (rs.next()) {
+                dvd.getSprache().add(rs.getString(5));
             }
-        }
-        view.forward(request, response);
 
+            request.setAttribute("dvd", dvd);
+            RequestDispatcher view = request.getRequestDispatcher("dvdupdate.jsp");
+            view.forward(request, response);
+
+        } catch (SQLException e) {
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
