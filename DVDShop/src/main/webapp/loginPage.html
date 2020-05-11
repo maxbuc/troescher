@@ -2,28 +2,42 @@
 <html>
 	<head>
 	
-		<title>Startseite</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>LoginPage</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="loginPageCss.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
+                
 	
 	</head>
 	
 	<body>
 		
 		<div class="flex">
-			<img src="images/logi_hell.png" width="600" height="300">
+                    <img src="images/logi_hell1.png" width="560" height="200"><br><br><br>
 		</div>
 		<form method="GET" action="ctrllogin">
+                    <div class="first">
 			<div class="mittig">
 				<label for="email">Email-Adresse&nbsp; &nbsp;</label>
-				<input type="email" name="username" size="30" maxlength="40" required>
-                        </div>
-                        <div class="mittig">
-                            	<label for="passwd">Passwort&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>  
-				<input type="password" name="passwort" size="31" maxlength="40" required id="myInput"><br><br>
-                                <input type="checkbox" onclick="myFunction()">Passwort anzeigen
+				<input type="email" name="username" size="40" maxlength="35" required>
+                                <br>
+                            	<label for="passwd">Passwort&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label> 
+                                <input type="password" name="passwort" size="40" maxlength="36" required id="myInput"><br>
                                 
+                          
+                        </div>
+                
+                    <label class="switch">
+                        <input type="checkbox" onclick="myFunction()">
+                        <span class="slider round"></span>
+                    </label>
+                        <br>
+                        <br>
+                    <p>Passwort ansehen</p>
+                    <p></p>
+                    <p></p>
+
                                 <script>
                                     function myFunction() {
                                       var x = document.getElementById("myInput");
@@ -34,10 +48,9 @@
                                       }
                                     }
                                 </script>
-			</div>
-		
-		
-			<input type="submit" value="Login">
+                    
+                    </div>
+                    <input type="submit" value="Login">
 		</form>
 		
 	</body>

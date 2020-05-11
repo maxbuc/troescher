@@ -6,43 +6,129 @@ body {
 /*Bild Startseite center position*/
 .flex { 
 	margin-left: 30%;
-    margin-right: 70%;
-	margin-top:1%;
-    width: 6em
+    margin-right: 45%;
+	margin-top:0;
+    /*width: 6em*/
 }
 
+.first {
+      padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 45px;
+  padding-left: 0px;
+    border: 1px solid white;
+}
 .mittig {
 	
-	margin-left: 450px;
+	margin-left: 439px;
 	margin-right: 200px;
-	margin-top:10px; 
+	margin-top:12px; 
 	margin-right:100px;
 	line-height: 40px;
 
 	
 }
 
-input[type=submit] /*Button Login*/{
-  width: 7%;
+input {
+  width: 40%;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+ 
+  
+}
+ /*Checkbox Login*/
+.switch {
   position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 15px;
+  left: 35%;
+  
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;/*Kreis*/
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
   background-color: #009999;
-  margin-top: 10px;
-  left:47%;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+input[type=submit] /*Button Login*/{
+    position:fixed;
+    margin-top: 0px;
+    margin-left: 580px;
+    
+  width: 10%;
+  
+  background-color: #009999;
   color: white;
-  padding: 6px 10px; /*Größe, Breite,Länge*/
+  padding: 5px 25px; /*Größe, Breite,Länge*/
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-family: "Teko";
   font-size: 20px;
+  text-align:center;
 }
 
 input[type=submit]:hover {
   background-color: #48D1CC;/*Farbe wenn man über suchebutton fährt*/   
 }
 
-.einruecken {
-	text-indent: 100px;
-	display: inline;
+p {
+    position:fixed;
+    left:41%;
+    text-align: center;
+    margin-top: -3em;
 }
+
 
