@@ -1,0 +1,38 @@
+body {
+	background: white;
+	font-family: "Teko";
+	font-size: 20px;}
+
+/*Bild Startseite center position*/
+.flex { 
+	margin-left: 30%;
+    margin-right: 70%;
+	margin-top: 3%;
+    width: 6em
+}
+
+.mittig {
+	position: fixed;
+	left: 35%;
+	top:50%;
+	right:65%
+	
+}
+
+input[type=submit] /*Button Suche*/{
+  width: 7%;
+  position: fixed;
+  top: 10%;
+  left: 45%;
+  background-color: #009999;
+  color: white;
+  padding: 8px 10px; /*Größe, Breite,Länge*/
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #48D1CC;/*Farbe wenn man über suchebutton fährt*/   
+}
+
