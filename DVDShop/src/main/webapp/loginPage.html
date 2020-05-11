@@ -10,21 +10,30 @@
 	</head>
 	
 	<body>
-			
-		Auch wir verwenden Cookies - das ist nichts Schlimmes. Sie erleichtern die Benutzung der Seite.
-        <a href="cookies.html">Mehr erfahren</a>
 		
 		<div class="flex">
 			<img src="images/logi_hell.png" width="600" height="300">
 		</div>
 		<form method="GET" action="ctrllogin">
 			<div class="mittig">
-				<label for="email">Email-Adresse</label>
-				<input type="email" name="username" required>
-		 
-				<label for="passwd">Passwort</label>  
-				<input type="password" name="passwort" size="30" maxlength="40" required>
-				
+				<label for="email">Email-Adresse&nbsp; &nbsp;</label>
+				<input type="email" name="username" size="30" maxlength="40" required>
+                        </div>
+                        <div class="mittig">
+                            	<label for="passwd">Passwort&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </label>  
+				<input type="password" name="passwort" size="31" maxlength="40" required id="myInput"><br><br>
+                                <input type="checkbox" onclick="myFunction()">Passwort anzeigen
+                                
+                                <script>
+                                    function myFunction() {
+                                      var x = document.getElementById("myInput");
+                                      if (x.type === "password") {
+                                        x.type = "text";
+                                      } else {
+                                        x.type = "password";
+                                      }
+                                    }
+                                </script>
 			</div>
 		
 		
