@@ -36,6 +36,7 @@ public class CtrlLogIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String mUsername = request.getParameter("username");
+        mUsername = mUsername.replaceFirst("%40", "@");
         String mPasswort = request.getParameter("passwort");
 
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
@@ -69,11 +70,11 @@ public class CtrlLogIn extends HttpServlet {
                 session.setAttribute("kunde", kunde);
                 view = request.getRequestDispatcher("ctrlselect");
             } else {
-                view = request.getRequestDispatcher("index.html");// hier muss der Link zur LogIn Seite hin
+                view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin
             }
             dbPool.releaseConnection(conn);
         } catch (SQLException ex) {
-            view = request.getRequestDispatcher("index.html");//hier muss der Link zur LogIn Seite hin
+            view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
         }
         view.forward(request, response);
     }

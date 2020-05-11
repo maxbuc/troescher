@@ -49,7 +49,7 @@ public class CtrlUpdateKunde extends HttpServlet {
         String kontonr = request.getParameter("kontonr");
         String email = request.getParameter("email");
         String passwort = request.getParameter("passwort");
-        int kid = Integer.parseInt(request.getParameter("passwort"));
+        int kid = Integer.parseInt(request.getParameter("kid"));
         
         kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
         
@@ -79,7 +79,6 @@ public class CtrlUpdateKunde extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("index.html");
             view.forward(request, response);
         }
-
         RequestDispatcher view = request.getRequestDispatcher("ctrlselect");
         view.forward(request, response);
     }

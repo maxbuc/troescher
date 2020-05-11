@@ -27,7 +27,7 @@
         </table>
                 <form action="ctrlreserve" method="POST">  
                     <input type="hidden" value="${dvd.did}" name="did">
-                    <input type="submit" value="Reservier mich!">
+                    <input type="submit" value="Leih mich!">
                 </form>
                     
     </body>

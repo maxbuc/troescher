@@ -1,6 +1,6 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>
         <h1>Ihr Gästebucheintrag</h1>
-        <form method="GET" action="ctrlupdatekunde">
+        <form method="POST" action="ctrlupdatekunde">
             <input type="hidden" name="kid" value="${kunde.kid}">
             <fieldset>
                 <table>

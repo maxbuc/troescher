@@ -40,17 +40,16 @@ public class CtrlSelectDetail extends HttpServlet {
         Connection conn = dbPool.getConnection();
         DVD dvd = null;
 
-        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk, zurueck, ausgeliehen "
-                + "from dvd, genre, sprache, dvd_sprache , dvd_kunde "
+        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
+                + "from dvd, genre, sprache, dvd_sprache "
                 + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did "
-                + "and dvd_sprache.sid=sprache.sid and dvd.did=? "
-                + "and dvd.did=dvd_kunde.did  "
-                + "and dvd_kunde.ausgeliehen= (select max(ausgeliehen) from dvd_kunde where did=?)";
+                + "and dvd_sprache.sid=sprache.sid and dvd.did=?";
 
+        String verfuegbarkeit = "select ausgeliehen, zurueck from dvd_kunde, dvd where dvd_kunde.did = dvd.did and dvd.did=? order by zurueck desc";
+        
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, Integer.parseInt(request.getParameter("did")));
-            pstm.setInt(2, Integer.parseInt(request.getParameter("did")));
             
             ResultSet rs = pstm.executeQuery();
 
@@ -72,15 +71,29 @@ public class CtrlSelectDetail extends HttpServlet {
             fsk = rs.getInt(7);
 
             dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
-            if (rs.getDate(8) == null) {
-                dvd.setVerfuegbar(false);
-            }else{
-                dvd.setVerfuegbar(true);
-            }
-
+           
             while (rs.next()) {
                 dvd.getSprache().add(rs.getString(5));
             }
+            
+            pstm = conn.prepareStatement(verfuegbarkeit);
+            pstm.setInt(1, dvd.getDid());
+            
+            rs = pstm.executeQuery();
+             
+            if(rs.next()){
+                if(rs.getDate("zurueck")==null){
+                    dvd.setVerfuegbar(true);
+                }else{
+                    dvd.setVerfuegbar(false);
+                }
+            }else{
+                dvd.setVerfuegbar(true);
+            }
+            
+            
+            
+            
             dbPool.releaseConnection(conn);
         } catch (SQLException ex) {
             response.getWriter().print(ex);
