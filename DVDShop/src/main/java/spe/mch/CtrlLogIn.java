@@ -36,7 +36,7 @@ public class CtrlLogIn extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String mUsername = request.getParameter("username");
-        mUsername = mUsername.replaceFirst("%40", "@");
+        mUsername = mUsername.replaceAll("%40", "@");
         String mPasswort = request.getParameter("passwort");
         RequestDispatcher view = null;
         
@@ -79,6 +79,7 @@ public class CtrlLogIn extends HttpServlet {
                 }
                 dbPool.releaseConnection(conn);
             } catch (SQLException ex) {
+               // response.getWriter().print(ex.getMessage());
                 view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
             }
         }

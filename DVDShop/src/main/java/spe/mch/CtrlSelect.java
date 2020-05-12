@@ -50,7 +50,7 @@ public class CtrlSelect extends HttpServlet {
                 logInView.forward(request, response);
             }
         } catch (NullPointerException e) {
-            RequestDispatcher logInView = request.getRequestDispatcher("index.html");
+            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
             logInView.forward(request, response);
         }
 
