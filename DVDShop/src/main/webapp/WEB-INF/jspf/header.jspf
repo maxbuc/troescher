@@ -17,11 +17,9 @@
     <body>
         <h1> Hallo, ${kunde.email} !</h1>
         <div class="flex">
-<<<<<<< HEAD
+
             <img src="logi_hell_copy.png" width="100" height="50">
-=======
-            <img src="../../images/logi_hell_copy.png" alt=""/>
->>>>>>> 6015a656424b8fbf7ec6a0b86eb7001dced49eb3
+          
         </div>
         
         
