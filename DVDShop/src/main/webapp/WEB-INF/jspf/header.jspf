@@ -17,34 +17,28 @@
     <body>
         <h1> Hallo,${kunde.email} !</h1>
         <div class="flex">
-<<<<<<< HEAD
+
 		<img src="logi_hell_copy.png" width="400" height="100">
 	</div>
-=======
 
             <img src="logi_hell_copy.png" width="100" height="50">
           
         </div>
         
+
         
->>>>>>> cd7a1acafc3ebe3bcef6ff183af0fe218429acd1
-        <nav>
             <ul>
                 <li><a href="ctrlselect">Home</a></li>
                 <li><a href="ueberUns.html">Über uns</a></li>
-<<<<<<< HEAD
                 <li><a href="formular_neu.jsp">DVD hinzufügen</a></li>
-=======
-                <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
+               <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
                 <li><a href="ctrlselectzurueckgeben">DVD zurück</a></li>
->>>>>>> cd7a1acafc3ebe3bcef6ff183af0fe218429acd1
-                <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
                 <li><a href="ctrlselectausgeliehen">Meine DVDs</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
                 <li><a href="ctrllogout">LogOut</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
 
             </ul>
-        </nav>
+        
         
     </body>
 </html>
