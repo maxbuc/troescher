@@ -15,25 +15,22 @@
         <title>DVDShop</title>
     </head>
     <body>
-        <h1> Hallo, ${kunde.email} !</h1>
+        <h1> Hallo,${kunde.email} !</h1>
         <div class="flex">
-<<<<<<< HEAD
-            <img src="logi_hell_copy.png" width="100" height="50">
-=======
-            <img src="../../images/logi_hell_copy.png" alt=""/>
->>>>>>> 6015a656424b8fbf7ec6a0b86eb7001dced49eb3
-        </div>
-        
-        
+		<img src="logi_hell_copy.png" width="400" height="100">
+	</div>
         <nav>
             <ul>
                 <li><a href="ctrlselect">Home</a></li>
                 <li><a href="ueberUns.html">Über uns</a></li>
-                <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
+                <li><a href="formular_neu.jsp">DVD hinzufügen</a></li>
                 <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
                 <li><a href="contact.html">Kontakt</a></li>
                 <li><a href="ctrllogout">LogOut</a></li>
+
             </ul>
         </nav>
         
-        <p></p>
+    </body>
+</html>
+        

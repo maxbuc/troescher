@@ -10,7 +10,7 @@ body {background-color: #009999;
 	animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
 	}
 
-h1	{color: red;font-size:18px; float: left; font-family: "Teko";}
+h1	{color: black;font-size:25px; float: left; font-family: "Teko";}
 
 h2	{color: purple;font-size:14px;font-family: "Teko";}
 a       {color:red;}
@@ -70,22 +70,26 @@ table tr:hover {
 }
 
 /*Navileiste Buttons, Home und Co*/
+
 ul {
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: white; /*Hintergundleiste*/
-  position: fixed;
-  top: 0;
-  left:0;
+  padding: 6px 6px;
+  background-color: white;
+  
+  position: relative;
+  top: 100px;
+  left:-10px;
+  right: -10px;
   width:100%;
-  height: 36%
+  height: 100px;
+  
+  
 }
 
 li {
-  float: left;/*Buttons alle Links*/
-  font-family: "Teko";
+  float: left;
+   font-family: "Teko";
   font-size: 23px;
   margin-top: -12px;
 }
@@ -102,7 +106,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #48D1CC; /*wenn man über Buttons fährt*/
+   background-color: #48D1CC; /*wenn man über Buttons fährt*/
   color: white;
   text-align: center;
   padding: 14px 18px;
@@ -111,49 +115,8 @@ li a:hover {
   font-family: "Teko";
   font-size: 23px;
 }
-/*Ende Navileiste*/
-/*
-nav ul {
-    margin: 0; 
-    padding: 8em;
-    text-align: left;
-    background-color: white;
-  }
 
-  nav li {
-    list-style: none;
-    display: inline-block;
-    margin: 0; 
-    padding: 0;
-  }
-
-  nav a, 
-  nav span {
-   display: block;
-    width: 12em;
-    margin: 0.6em 0 0 0;
-    padding: 0.4em;
-    text-decoration: none; 
-    font-weight: bold;
-    border: 1px solid blue;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0px 5px 10px white inset;
-    color: gold; 
-    background-color: white;
-    -webkit-transition: all .25s ease-in;
-    transition: all .25s ease-in;
-  }
-
-  nav a:focus,
-  nav a:hover, 
-  nav span {
-     color: blue; 
-     background-color: gold;
-  }
-
-  nav a:focus,
-  nav a:hover{
-    margin-top: 0;
-    padding: 1em 0.4em 0.4em;
-  }  
-*/
+.logout {
+    diplay:inline;
+    float:right;
+}

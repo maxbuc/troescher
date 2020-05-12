@@ -9,6 +9,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>loginPage.html</welcome-file>        
+        <welcome-file>ladeSeite.html</welcome-file>        
     </welcome-file-list>
 </web-app>

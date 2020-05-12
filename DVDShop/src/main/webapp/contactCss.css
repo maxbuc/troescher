@@ -19,7 +19,7 @@ h1 {color: #009999;
   border-radius: 4px;
   cursor: pointer;
   float: right;
-  margin-top: -130px;
+  margin-top: -100px;
 }
 
 .button:hover {
@@ -92,4 +92,9 @@ input[type=submit]:hover {
     width: 100%;
     margin-top: 0;
   }
+}
+
+.button2 {
+
+  margin-top: -35px;
 }
