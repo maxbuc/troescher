@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlSelectDetail", urlPatterns = {"/ctrlselectdetail"})
-public class CtrlSelectDetail extends HttpServlet {
+@WebServlet(name = "CtrlSelectDetailMyDVD", urlPatterns = {"/ctrlselectdetailmydvd"})
+public class CtrlSelectDetailMyDVD extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -117,7 +117,7 @@ public class CtrlSelectDetail extends HttpServlet {
         }
 
         request.setAttribute("dvd", dvd);
-        RequestDispatcher view = request.getRequestDispatcher("view_details.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("view_detailsMyDVD.jsp");
         view.forward(request, response);
 
     }

@@ -6,8 +6,10 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -22,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlSelectDetail", urlPatterns = {"/ctrlselectdetail"})
-public class CtrlSelectDetail extends HttpServlet {
+@WebServlet(name = "CtrlSelectAusgeliehen", urlPatterns = {"/ctrlselectausgeliehen"})
+public class CtrlSelectAusgeliehen extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +38,6 @@ public class CtrlSelectDetail extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         //Abfrage, ob User eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
@@ -52,25 +53,24 @@ public class CtrlSelectDetail extends HttpServlet {
             RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
             logInView.forward(request, response);
         }
-        
-        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-        Connection conn = dbPool.getConnection();
-        DVD dvd = null;
+                
 
         String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
-                + "from dvd, genre, sprache, dvd_sprache "
-                + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did "
-                + "and dvd_sprache.sid=sprache.sid and dvd.did=?";
+                + "from dvd, genre, sprache, dvd_sprache, dvd_kunde "
+                + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid and dvd.did=dvd_kunde.did and dvd_kunde.kid=? "
+                + "and dvd_kunde.zurueck is null "
+                + "order by dvd.did";
 
-        String verfuegbarkeit = "select ausgeliehen, zurueck from dvd_kunde, dvd where dvd_kunde.did = dvd.did and dvd.did=? order by zurueck desc";
-        int did = Integer.parseInt(request.getParameter("did"));
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        ArrayList<DVD> akku = new ArrayList<>();
+        ArrayList<DVD> dvdList = new ArrayList<>();
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, did);
-            
+            pstm.setInt(1, sessionKunde.getKid());
             ResultSet rs = pstm.executeQuery();
 
-            
+            int did = 0;
             String titel = null;
             int laenge = 0;
             int erscheinungsjahr = 0;
@@ -78,48 +78,38 @@ public class CtrlSelectDetail extends HttpServlet {
             String genre = null;
             int fsk = 0;
 
-            rs.next();
-            
-            titel = rs.getString(2);
-            laenge = rs.getInt(3);
-            erscheinungsjahr = rs.getInt(4);
-            sprache.add(rs.getString(5));
-            genre = rs.getString(6);
-            fsk = rs.getInt(7);
-
-            dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
-           
             while (rs.next()) {
-                dvd.getSprache().add(rs.getString(5));
+
+                did = rs.getInt(1);
+                titel = rs.getString(2);
+                laenge = rs.getInt(3);
+                erscheinungsjahr = rs.getInt(4);
+                sprache.add(rs.getString(5));
+                genre = rs.getString(6);
+                fsk = rs.getInt(7);
+
+                DVD dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
+                akku.add(dvd);
             }
-            
-            pstm = conn.prepareStatement(verfuegbarkeit);
-            pstm.setInt(1, did);
-            
-            rs = pstm.executeQuery();
-             
-            if(rs.next()){
-                if(rs.getDate("zurueck")==null){
-                    dvd.setVerfuegbar(false);
-                }else{
-                    dvd.setVerfuegbar(true);
-                }
-            }else{
-                dvd.setVerfuegbar(true);
-            }
-            
-            
-            
-            
             dbPool.releaseConnection(conn);
-        } catch (SQLException ex) {
-            response.getWriter().print(ex);
+
+//            doppelte DVDs suchen
+            for (int i = 0; i < akku.size() - 1; i++) {
+                if (!akku.isEmpty() && akku.get(i).getDid() == akku.get(i + 1).getDid()) {
+                    akku.get(i).getSprache().add(akku.get(i + 1).getSprache().get(0));
+                    akku.remove(i + 1);
+                    i--;
+                }
+            }
+            dvdList = akku;
+
+        } catch (SQLException e) {
+            response.getWriter().print(e.getMessage());
         }
 
-        request.setAttribute("dvd", dvd);
-        RequestDispatcher view = request.getRequestDispatcher("view_details.jsp");
+        request.setAttribute("dvdList", dvdList);
+        RequestDispatcher view = request.getRequestDispatcher("meinedvdausgeben.jsp");
         view.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
