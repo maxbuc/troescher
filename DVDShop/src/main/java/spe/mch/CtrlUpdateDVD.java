@@ -7,6 +7,12 @@ package spe.mch;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +38,55 @@ public class CtrlUpdateDVD extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int did = Integer.parseInt(request.getParameter("did"));
+        
+        String sql = "update dvd set titel=?, laenge=?, erscheinungsjahr=?, gid=?, fsk=? where did=?";
+
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+
+        String[] sprachen = request.getParameterValues("sprache");
+        ArrayList<Integer> sprachenList = new ArrayList<>();
+        for(int i = 0; i<sprachen.length;i++){
+            sprachenList.add(Integer.parseInt(sprachen[i]));
+        }
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, request.getParameter("titel"));
+            pstm.setInt(2, Integer.parseInt(request.getParameter("laenge")));
+            pstm.setInt(3, Integer.parseInt(request.getParameter("erscheinungsjahr")));
+            pstm.setInt(4, Integer.parseInt(request.getParameter("gid")));
+            pstm.setInt(5, Integer.parseInt(request.getParameter("fsk")));
+            pstm.setInt(6, did);
+
+            pstm.executeUpdate();
+            pstm = null;
+                
+            //alles aus dvd_sprache mit selber did löschen
+            sql = "delete from dvd_sprache where did=?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, did);
+            pstm.executeUpdate();
+            
+            
+            for (int i = 0; i < sprachenList.size(); i++) {
+                sql = "insert into dvd_sprache values (?,?)";
+                pstm = conn.prepareStatement(sql);
+                pstm.setInt(1, did);
+                pstm.setInt(2, sprachenList.get(i));
+                pstm.executeUpdate();
+            }
+            
+
+            dbPool.releaseConnection(conn);
+            RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
+            view.forward(request, response);
+        } catch (SQLException ex) {
+            for (int i = 0; i < sprachen.length; i++) {
+                response.getWriter().println(sprachen[i]);
+                
+            }
+            response.getWriter().print(ex.getMessage());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

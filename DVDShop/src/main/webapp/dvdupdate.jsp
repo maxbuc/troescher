@@ -1,8 +1,9 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>   
 <h1>DVD aktualisieren</h1>
 
-<form method="POST" action="ctrldvdupdate">
+<form method="POST" action="ctrlupdatedvd">
     <fieldset>
+        <input type="hidden" name="did" value="${dvd.did}">
         <table>
             <tr>
                 <td><label for="titel">Titel:</label></td>
@@ -19,7 +20,7 @@
 
             <tr>
                 <td><label for="genre">Genre:</label></td>
-                <td><select name="gid">
+                <td><select name="gid" >
                         <c:forEach var="genre" items="${genreList}">
                             <option value="${genre.number}">${genre.name}</option>
                         </c:forEach>
@@ -29,8 +30,11 @@
             <tr>
                 <td><label for="sprache">Sprache:</label></td>
                 <td>
-                    <c:forEach var="sprache" items="${spracheList}">
-                        <input type="checkbox" name="sprache" value="${sprache.number}">${sprache.name} </br>
+                    <c:forEach var="sprache" items="${spracheChecked}">
+                        <input type="checkbox" name="sprache" value="${sprache.number}" checked>${sprache.name} </br>
+                    </c:forEach>
+                    <c:forEach var="spracheU" items="${spracheUnchecked}">
+                        <input type="checkbox" name="sprache" value="${spracheU.number}">${spracheU.name} </br>
                     </c:forEach>
                 </td>
             </tr>
@@ -40,15 +44,13 @@
             <tr>
                 <td><label for="fsk">FSK:</label></td>
                 <td><select name="fsk">
-                        <option value="0">0</option>
-                        <option value="6">6</option>
-                        <option value="12">12</option>
-                        <option value="16">16</option>
-                        <option value="18">18</option>
+                        <c:forEach var="fsk" items="${fskList}">
+                            <option value="${fsk}">${fsk}</option>
+                        </c:forEach>
                     </select></td>                        
             </tr>
         </table>
-        <input type="submit" value="Hinzufügen">
+        <input type="submit" value="Ändern">
 
     </fieldset>
 </form>

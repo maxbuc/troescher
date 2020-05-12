@@ -41,9 +41,33 @@ public class CtrlUpdateSelectDVD extends HttpServlet {
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
 
+        String sql = "select * from genre";
+        String sql2 = "select * from sprache";
+
+        ArrayList<Genre> genreList = new ArrayList<>();
+        ArrayList<Sprache> spracheList = new ArrayList<>();
+
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                genreList.add(new Genre(rs.getInt("gid"), rs.getString("name")));
+            }
+
+            pstm = conn.prepareStatement(sql2);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                spracheList.add(new Sprache(rs.getInt(1), rs.getString(2)));
+            }
+
+            dbPool.releaseConnection(conn);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+
         DVD dvd = null;
 
-        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
+        sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
                 + "from dvd, genre, sprache, dvd_sprache "
                 + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did "
                 + "and dvd_sprache.sid=sprache.sid and dvd.did=?";
@@ -76,7 +100,52 @@ public class CtrlUpdateSelectDVD extends HttpServlet {
                 dvd.getSprache().add(rs.getString(5));
             }
 
+            //FSK Liste erstellen, damit ausgewähltes Alter ganz oben staht
+            ArrayList<Integer> fskList = new ArrayList<>();
+            fskList.add(fsk);
+            fskList.add(0);
+            fskList.add(6);
+            fskList.add(12);
+            fskList.add(16);
+            fskList.add(18);
+
+            //Sprache in zwei ArrayLists teilen , die eine checked die andere die übrigen
+            ArrayList<Sprache> spracheChecked = new ArrayList<>();
+            ArrayList<Sprache> spracheUnchecked = new ArrayList<>();
+            for (int i = 0; i < spracheList.size(); i++) {
+                boolean vorhanden = false;
+                for (int j = 0; j < dvd.getSprache().size(); j++) {
+                    if (spracheList.get(i).getName().equals(dvd.getSprache().get(j))) {
+                        spracheChecked.add(spracheList.get(i));
+                        vorhanden = true;
+                    }
+
+                }
+                if (!vorhanden) {
+                    spracheUnchecked.add(spracheList.get(i));
+                }
+
+            }
+
+            //GenreList sortieren, damit ausgewähltes ganz oben steht 
+            Genre temp = null;
+            for (int i = 0; i < genreList.size(); i++) {
+                if (genreList.get(i).getName().equals(genre)) {
+                    temp = genreList.get(i);
+                    genreList.remove(i);
+                }
+            }
+            ArrayList<Genre> akku = new ArrayList<>();
+            akku.add(temp);
+            for (int i = 0; i < genreList.size(); i++) {
+                akku.add(genreList.get(i));
+            }
+
+            request.setAttribute("genreList", akku);
+            request.setAttribute("spracheChecked", spracheChecked);
+            request.setAttribute("spracheUnchecked", spracheUnchecked);
             request.setAttribute("dvd", dvd);
+            request.setAttribute("fskList", fskList);
             RequestDispatcher view = request.getRequestDispatcher("dvdupdate.jsp");
             view.forward(request, response);
 
