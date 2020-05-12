@@ -10,10 +10,11 @@ body {background-color: #009999;
 	animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
 	}
 
-h1	{color: #009999;font-size:18px; float: left; font-family: "Teko";}
+h1	{color: red;font-size:18px; float: left; font-family: "Teko";}
 
-h2	{color: #009999;font-size:14px;font-family: "Teko";}
+h2	{color: purple;font-size:14px;font-family: "Teko";}
 a       {color:red;}
+
 
 
 
