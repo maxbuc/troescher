@@ -1,7 +1,21 @@
-body    {background-color:#F5DEB3;font-family:verdana;color:black; }
-h1	{color:blue;font-size:18px;}
-h2	{color:blue;font-size:14px;}
+*{
+	font-family: "Teko";
+	font-size: 20px;
+}
+body {background-color: #009999;
+	animation-name: first;
+	animation-duration: 15s;
+	animation-iteration-count: infinite; /*durchgehend*/
+	animation-direction: alternate;
+	animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
+	}
+
+h1	{color: #009999;font-size:18px; float: left; font-family: "Teko";}
+
+h2	{color: #009999;font-size:14px;font-family: "Teko";}
 a       {color:red;}
+
+
 
 table{
     width:100%;
@@ -35,12 +49,74 @@ table tr:hover {
     color: white;
 }
 
+/*Bild Startseite center position*/
+.flex { 
+	left: 35%;
+    right: 65%;
+	top: 4%;
+    width: 6em;
+	position: fixed;
+	z-index: 10;
+}
 
+	
+@keyframes first{
+	0% {background-color: #00C3C3;}
+	25% {background-color: #00A7A7;}
+	50% {background-color: #008A8A;}
+	75% {background-color: #00ACAC;}
+	100% {background-color: #088A85;}
+}
+
+/*Navileiste Buttons, Home und Co*/
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white; /*Hintergundleiste*/
+  position: fixed;
+  top: 0;
+  left:0;
+  width:100%;
+  height: 36%
+}
+
+li {
+  float: left;/*Buttons alle Links*/
+  font-family: "Teko";
+  font-size: 23px;
+  margin-top: -12px;
+}
+
+li a {
+  display: block;
+  color: #009999; /*Farbe Buchstaben*/
+  text-align: center;
+  padding: 14px 18px;
+  text-decoration: none;
+  margin-top: 165px;
+  font-family: "Teko";
+  font-size: 23px;
+}
+
+li a:hover {
+  background-color: #48D1CC; /*wenn man über Buttons fährt*/
+  color: white;
+  text-align: center;
+  padding: 14px 18px;
+  text-decoration: none;
+  display: block; 
+  font-family: "Teko";
+  font-size: 23px;
+}
+/*Ende Navileiste*/
+/*
 nav ul {
     margin: 0; 
-    padding: 0.8em;
+    padding: 8em;
     text-align: left;
-    background-color: #F5DEB3;
+    background-color: white;
   }
 
   nav li {
@@ -52,7 +128,7 @@ nav ul {
 
   nav a, 
   nav span {
-    display: block;
+   display: block;
     width: 12em;
     margin: 0.6em 0 0 0;
     padding: 0.4em;
@@ -62,7 +138,7 @@ nav ul {
     border-radius: 10px 10px 0 0;
     box-shadow: 0px 5px 10px white inset;
     color: gold; 
-    background-color: blue;
+    background-color: white;
     -webkit-transition: all .25s ease-in;
     transition: all .25s ease-in;
   }
@@ -79,3 +155,4 @@ nav ul {
     margin-top: 0;
     padding: 1em 0.4em 0.4em;
   }  
+*/

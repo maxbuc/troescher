@@ -8,14 +8,22 @@
     <head>
         <link rel="stylesheet" href="mStyle.css" type="text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
+        <script defer scr="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        
         <title>DVDShop</title>
     </head>
     <body>
-
-        <nav>
+        <h1> Hallo, ${kunde.email} !</h1>
+        <div class="flex">
+            <img scr="logi_hell_copy.png" width="400" height="100">
+        </div>
+        <!--<nav>-->
             <ul>
+                <li><a href="ctrlselect">Home</a></li>
                 <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
-                <li><a href="ctrlselect">DVDs anzeigen</a></li>
-                <li><a href="kunde_bearbeiten.jsp">${kunde.email}, bearbeiten Sie Ihr Konto</a></li>  
+                <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
             </ul>
-        </nav>
+        <!--</nav>-->
