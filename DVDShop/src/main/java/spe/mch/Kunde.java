@@ -27,6 +27,14 @@ public class Kunde {
     public Kunde() {
     }
 
+    public Kunde(int kid, String email, String passwort) {
+        this.kid = kid;
+        this.email = email;
+        this.passwort = passwort;
+    }
+    
+    
+
     public int getKid() {
         return kid;
     }

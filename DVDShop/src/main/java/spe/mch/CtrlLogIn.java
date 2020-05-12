@@ -39,8 +39,16 @@ public class CtrlLogIn extends HttpServlet {
         mUsername = mUsername.replaceAll("%40", "@");
         String mPasswort = request.getParameter("passwort");
         RequestDispatcher view = null;
+
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         
-        if (mUsername.equals("admin@admin.de") && mPasswort.equals("admin")) {
+        String admin_email = "admin@admin.de";
+        if (mUsername.equals(admin_email) && mPasswort.equals("admin")) {
+            
+            Kunde admin = new Kunde(1, admin_email, "admin");
+            admin.setSessionid(sessionid);
+            session.setAttribute("kunde", admin);
             view = request.getRequestDispatcher("ctrlselectadmin");
         } else {
 
@@ -48,9 +56,6 @@ public class CtrlLogIn extends HttpServlet {
             Connection conn = dbPool.getConnection();
 
             String sql = "select * from kunde where email=?";
-
-            HttpSession session = request.getSession();
-            String sessionid = session.getId();
 
             try {
                 PreparedStatement pstm = conn.prepareStatement(sql);
@@ -79,10 +84,11 @@ public class CtrlLogIn extends HttpServlet {
                 }
                 dbPool.releaseConnection(conn);
             } catch (SQLException ex) {
-               // response.getWriter().print(ex.getMessage());
+                // response.getWriter().print(ex.getMessage());
                 view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
             }
         }
+        
         view.forward(request, response);
 
     }
