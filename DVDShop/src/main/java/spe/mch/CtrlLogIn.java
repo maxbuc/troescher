@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,20 +42,20 @@ public class CtrlLogIn extends HttpServlet {
         String mPasswort = request.getParameter("passwort");
         RequestDispatcher view = null;
 
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+
         HttpSession session = request.getSession();
         String sessionid = session.getId();
-        
+
         String admin_email = "admin@admin.de";
         if (mUsername.equals(admin_email) && mPasswort.equals("admin")) {
-            
-            Kunde admin = new Kunde(1, admin_email, "admin");
-            admin.setSessionid(sessionid);
-            session.setAttribute("kunde", admin);
-            view = request.getRequestDispatcher("ctrlselectadmin");
-        } else {
+            Kunde kunde = new Kunde(1, "admin@admin.de", "admin");
 
-            ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-            Connection conn = dbPool.getConnection();
+            request.setAttribute("kunde", kunde);
+            view = request.getRequestDispatcher("ctrlselectadmin");
+
+        } else {
 
             String sql = "select * from kunde where email=?";
 
@@ -88,7 +90,7 @@ public class CtrlLogIn extends HttpServlet {
                 view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
             }
         }
-        
+
         view.forward(request, response);
 
     }

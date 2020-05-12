@@ -82,10 +82,10 @@ insert into dvd_sprache values(2,1);
 insert into dvd_sprache values(2,2);
 insert into dvd_sprache values(2,3);
 
-insert into dvd_kunde values(1,1,'2020-05-06', null);
-insert into dvd_kunde values(1,1,'2019-05-06', '2020-01-01');
-insert into dvd_kunde values(1,1,'2020-03-23', '2020-04-16');
-insert into dvd_kunde values(2,1,'2020-05-04', '2020-05-06');
+insert into dvd_kunde values(1,2,'2020-05-06', null);
+insert into dvd_kunde values(1,2,'2019-05-06', '2020-01-01');
+insert into dvd_kunde values(1,2,'2020-03-23', '2020-04-16');
+insert into dvd_kunde values(2,2,'2020-05-04', '2020-05-06');
 
 insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk)
 values('Get Out', 104, 2017, 1, 16);
