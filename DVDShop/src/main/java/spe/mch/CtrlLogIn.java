@@ -50,11 +50,18 @@ public class CtrlLogIn extends HttpServlet {
 
         String admin_email = "admin@admin.de";
         if (mUsername.equals(admin_email) && mPasswort.equals("admin")) {
-            Kunde kunde = new Kunde(1, "admin@admin.de", "admin");
-
-            request.setAttribute("kunde", kunde);
-            view = request.getRequestDispatcher("ctrlselectadmin");
-
+            try {
+                PreparedStatement pstm = conn.prepareStatement("update kunde set sessionId=? where kid=1");
+                pstm.setString(1, sessionid);
+                pstm.executeUpdate();
+                                
+                
+                view = request.getRequestDispatcher("ctrlselectadmin");
+                
+            } catch (SQLException ex) {
+                
+            }
+            
         } else {
 
             String sql = "select * from kunde where email=?";
@@ -64,22 +71,30 @@ public class CtrlLogIn extends HttpServlet {
                 pstm.setString(1, mUsername);
                 ResultSet rs = pstm.executeQuery();
                 rs.next();
+                
+                
+                
 
                 int kid = rs.getInt("kid");
-                String vorname = rs.getString("vorname");
-                String nachname = rs.getString("nachname");
-                String strasse = rs.getString("strasse");
-                String hausnummer = rs.getString("hausnummer");
-                String plz = rs.getString("plz");
-                String kontonr = rs.getString("kontonr");
-                String email = rs.getString("email");
-                String passwort = rs.getString("passwort");
+//                String vorname = rs.getString("vorname");
+//                String nachname = rs.getString("nachname");
+//                String strasse = rs.getString("strasse");
+//                String hausnummer = rs.getString("hausnummer");
+//                String plz = rs.getString("plz");
+//                String kontonr = rs.getString("kontonr");
+//                String email = rs.getString("email");
+//                String passwort = rs.getString("passwort");
 
                 if (rs.getString("passwort").equals(mPasswort)) {
+                    
+                    pstm = conn.prepareStatement("update kunde set sessionId=? where kid=?");
+                    pstm.setString(1, sessionid);
+                    pstm.setInt(2, kid);
+                    pstm.executeUpdate();
 
-                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    kunde.setSessionid(sessionid);
-                    session.setAttribute("kunde", kunde);
+//                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
+//                    kunde.setSessionid(sessionid);
+//                    session.setAttribute("kunde", kunde);
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {
                     view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin

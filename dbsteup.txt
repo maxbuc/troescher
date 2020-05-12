@@ -25,7 +25,8 @@ hausnummer varchar(50) not null,
 plz varchar(50) not null,
 kontonr varchar(50) not null,
 email varchar(50) not null,
-passwort varchar(50) not null
+passwort varchar(50) not null,
+sessionId varchar(100)
 );
 
 create table dvd_kunde(
