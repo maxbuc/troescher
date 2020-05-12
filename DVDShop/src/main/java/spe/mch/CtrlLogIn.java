@@ -50,6 +50,7 @@ public class CtrlLogIn extends HttpServlet {
             String sql = "select * from kunde where email=?";
 
             HttpSession session = request.getSession();
+            String sessionid = session.getId();
 
             try {
                 PreparedStatement pstm = conn.prepareStatement(sql);
@@ -70,7 +71,8 @@ public class CtrlLogIn extends HttpServlet {
                 if (rs.getString("passwort").equals(mPasswort)) {
 
                     Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    session.setAttribute("kunde", kunde);
+                    kunde.setSessionid(sessionid);
+                    session.setAttribute(sessionid, kunde);
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {
                     view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin

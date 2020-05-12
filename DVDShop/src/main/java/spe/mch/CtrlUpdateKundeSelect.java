@@ -6,10 +6,7 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlSelectDetail", urlPatterns = {"/ctrlselectdetail"})
-public class CtrlSelectDetail extends HttpServlet {
+@WebServlet(name = "CtrlUpdateKundeSelect", urlPatterns = {"/ctrlupdatekundeselect"})
+public class CtrlUpdateKundeSelect extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,9 +32,7 @@ public class CtrlSelectDetail extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        //Abfrage, ob User eingeloggt ist!
+            throws ServletException, IOException {//Abfrage, ob User eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
         Kunde sessionKunde = null;
@@ -53,73 +48,10 @@ public class CtrlSelectDetail extends HttpServlet {
             logInView.forward(request, response);
         }
         
-        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-        Connection conn = dbPool.getConnection();
-        DVD dvd = null;
-
-        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk "
-                + "from dvd, genre, sprache, dvd_sprache "
-                + "where dvd.gid=genre.gid and dvd.did=dvd_sprache.did "
-                + "and dvd_sprache.sid=sprache.sid and dvd.did=?";
-
-        String verfuegbarkeit = "select ausgeliehen, zurueck from dvd_kunde, dvd where dvd_kunde.did = dvd.did and dvd.did=? order by zurueck desc";
         
-        try {
-            PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, Integer.parseInt(request.getParameter("did")));
-            
-            ResultSet rs = pstm.executeQuery();
-
-            int did = 0;
-            String titel = null;
-            int laenge = 0;
-            int erscheinungsjahr = 0;
-            ArrayList<String> sprache = new ArrayList<>();
-            String genre = null;
-            int fsk = 0;
-
-            rs.next();
-            did = rs.getInt(1);
-            titel = rs.getString(2);
-            laenge = rs.getInt(3);
-            erscheinungsjahr = rs.getInt(4);
-            sprache.add(rs.getString(5));
-            genre = rs.getString(6);
-            fsk = rs.getInt(7);
-
-            dvd = new DVD(did, titel, laenge, erscheinungsjahr, sprache, genre, fsk);
-           
-            while (rs.next()) {
-                dvd.getSprache().add(rs.getString(5));
-            }
-            
-            pstm = conn.prepareStatement(verfuegbarkeit);
-            pstm.setInt(1, dvd.getDid());
-            
-            rs = pstm.executeQuery();
-             
-            if(rs.next()){
-                if(rs.getDate("zurueck")==null){
-                    dvd.setVerfuegbar(true);
-                }else{
-                    dvd.setVerfuegbar(false);
-                }
-            }else{
-                dvd.setVerfuegbar(true);
-            }
-            
-            
-            
-            
-            dbPool.releaseConnection(conn);
-        } catch (SQLException ex) {
-            response.getWriter().print(ex);
-        }
-
-        request.setAttribute("dvd", dvd);
-        RequestDispatcher view = request.getRequestDispatcher("view_details.jsp");
+        request.setAttribute("kunde", sessionKunde);
+        RequestDispatcher view = request.getRequestDispatcher("kunde_bearbeiten.jsp");
         view.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

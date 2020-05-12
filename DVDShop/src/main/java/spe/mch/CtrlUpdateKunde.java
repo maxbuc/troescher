@@ -37,6 +37,22 @@ public class CtrlUpdateKunde extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //Abfrage, ob User eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
+        Kunde sessionKunde = null;
+        try {
+            sessionKunde = (Kunde) session.getAttribute(sessionid);
+            request.setAttribute("kunde", sessionKunde);
+            if (!sessionKunde.getSessionid().equals(sessionid)) {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
+            }
+        } catch (NullPointerException e) {
+            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+            logInView.forward(request, response);
+        }
+        
         String sql = "update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?";
 
         Kunde kunde=null;
@@ -52,10 +68,10 @@ public class CtrlUpdateKunde extends HttpServlet {
         int kid = Integer.parseInt(request.getParameter("kid"));
         
         kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
+        kunde.setSessionid(sessionid);
         
-        HttpSession session = request.getSession();
-        session.removeAttribute("kunde");
-        session.setAttribute("kunde", kunde);
+        session.removeAttribute(sessionid);
+        session.setAttribute(sessionid, kunde);
 
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();

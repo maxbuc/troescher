@@ -23,7 +23,7 @@
             <ul>
                 <li><a href="ctrlselect">Home</a></li>
                 <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
-                <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
+                <li><a href="ctrlupdatekundeselect">Mein Konto</a></li>
                 <li><a href="contact.html">Kontakt</a></li>
             </ul>
         </nav>

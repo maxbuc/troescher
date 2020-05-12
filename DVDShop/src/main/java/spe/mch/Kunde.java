@@ -10,6 +10,7 @@ public class Kunde {
     private String kontonr;
     private String email;
     private String passwort;
+    private String sessionid;
 
     public Kunde(int kid, String vorname, String nachname, String strasse, String hausnummer, String plz, String kontonr, String email, String passwort) {
         this.kid = kid;
@@ -96,6 +97,14 @@ public class Kunde {
 
     public void setPasswort(String passwort) {
         this.passwort = passwort;
+    }
+
+    public String getSessionid() {
+        return sessionid;
+    }
+
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid;
     }
     
     

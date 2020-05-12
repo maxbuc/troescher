@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +37,22 @@ public class CtrlSelect extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        //Abfrage, ob User eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
+        Kunde sessionKunde = null;
+        try {
+            sessionKunde = (Kunde) session.getAttribute(sessionid);
+            request.setAttribute("kunde", sessionKunde);
+            if (!sessionKunde.getSessionid().equals(sessionid)) {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
+            }
+        } catch (NullPointerException e) {
+            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+            logInView.forward(request, response);
+        }
 
         ArrayList<DVD> dvdList = new ArrayList<>();
 
