@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlUpdateKundeSelect", urlPatterns = {"/ctrlupdatekundeselect"})
-public class CtrlUpdateKundeSelect extends HttpServlet {
+@WebServlet(name = "CtrlLogout", urlPatterns = {"/ctrllogout"})
+public class CtrlLogout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,8 +37,8 @@ public class CtrlUpdateKundeSelect extends HttpServlet {
         String sessionid = session.getId();
         Kunde sessionKunde = null;
         try {
-            sessionKunde = (Kunde) session.getAttribute(sessionid);
-            request.setAttribute("kunde", sessionKunde);
+            sessionKunde = (Kunde) session.getAttribute("kunde");
+            
             if (!sessionKunde.getSessionid().equals(sessionid)) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);
@@ -48,9 +48,11 @@ public class CtrlUpdateKundeSelect extends HttpServlet {
             logInView.forward(request, response);
         }
         
+        session.removeAttribute("kunde");
         
-        request.setAttribute("kunde", sessionKunde);
-        RequestDispatcher view = request.getRequestDispatcher("kunde_bearbeiten.jsp");
+        
+        
+        RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
         view.forward(request, response);
     }
 

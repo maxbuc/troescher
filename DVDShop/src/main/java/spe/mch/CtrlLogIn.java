@@ -72,7 +72,7 @@ public class CtrlLogIn extends HttpServlet {
 
                     Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
                     kunde.setSessionid(sessionid);
-                    session.setAttribute(sessionid, kunde);
+                    session.setAttribute("kunde", kunde);
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {
                     view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin

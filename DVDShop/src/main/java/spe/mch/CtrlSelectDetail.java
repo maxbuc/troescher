@@ -42,8 +42,8 @@ public class CtrlSelectDetail extends HttpServlet {
         String sessionid = session.getId();
         Kunde sessionKunde = null;
         try {
-            sessionKunde = (Kunde) session.getAttribute(sessionid);
-            request.setAttribute("kunde", sessionKunde);
+            sessionKunde = (Kunde) session.getAttribute("kunde");
+            
             if (!sessionKunde.getSessionid().equals(sessionid)) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);

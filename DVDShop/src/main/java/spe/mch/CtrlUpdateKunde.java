@@ -42,8 +42,8 @@ public class CtrlUpdateKunde extends HttpServlet {
         String sessionid = session.getId();
         Kunde sessionKunde = null;
         try {
-            sessionKunde = (Kunde) session.getAttribute(sessionid);
-            request.setAttribute("kunde", sessionKunde);
+            sessionKunde = (Kunde) session.getAttribute("kunde");
+            
             if (!sessionKunde.getSessionid().equals(sessionid)) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);
@@ -70,8 +70,8 @@ public class CtrlUpdateKunde extends HttpServlet {
         kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
         kunde.setSessionid(sessionid);
         
-        session.removeAttribute(sessionid);
-        session.setAttribute(sessionid, kunde);
+        session.removeAttribute("kunde");
+        session.setAttribute("kunde", kunde);
 
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
