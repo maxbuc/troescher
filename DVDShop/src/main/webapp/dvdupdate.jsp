@@ -1,8 +1,9 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>   
 <h1>DVD aktualisieren</h1>
 
-<form method="POST" action="ctrldvdupdate">
+<form method="POST" action="ctrlupdatedvd">
     <fieldset>
+        <input type="hidden" name="did" value="${dvd.did}">
         <table>
             <tr>
                 <td><label for="titel">Titel:</label></td>
@@ -49,7 +50,7 @@
                     </select></td>                        
             </tr>
         </table>
-        <input type="submit" value="Hinzufügen">
+        <input type="submit" value="Ändern">
 
     </fieldset>
 </form>
