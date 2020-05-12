@@ -60,7 +60,7 @@ insert into sprache (name) values('spanisch');
 
 
 insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort)
-values ('admin', 'admin', 'admin', 'admin', 'admin', 'admin', 'admin@adminde', 'admin');
+values ('admin', 'admin', 'admin', 'admin', 'admin', 'admin', 'admin@admin.de', 'admin');
 
 insert into kunde (vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort) 
 values ('Hans', 'Meier', 'Schulgasse', '23', '56723', 'DE123456789', 'hans@meier.de', '123');
