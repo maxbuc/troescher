@@ -28,7 +28,9 @@
                 <li><a href="ctrlselect">Home</a></li>
                 <li><a href="ueberUns.html">Über uns</a></li>
                 <li><a href="formular_neu.jsp">Neuer Eintrag</a></li>
+                <li><a href="ctrlselectzurueckgeben">DVD zurück</a></li>
                 <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
+                <li><a href="ctrlselectausgeliehen">Meine DVDs</a></li>
                 <li><a href="contact.html">Kontakt</a></li>
                 <li><a href="ctrllogout">LogOut</a></li>
             </ul>

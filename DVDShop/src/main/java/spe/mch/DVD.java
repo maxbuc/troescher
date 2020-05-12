@@ -22,6 +22,13 @@ public class DVD {
         this.fsk = fsk;
     }
 
+    public DVD(int did, String titel) {
+        this.did = did;
+        this.titel = titel;
+    }
+
+    
+    
     public DVD() {
     }
 

@@ -7,7 +7,7 @@
         <th>Erscheinungsjahr</th>
         <th>FSK</th>
         <th>Sprachen</th>
-        <th>Verfügbarkeit</th>
+        
     </tr>
 
     <tr>
@@ -20,23 +20,13 @@
                 ${sprache},
             </c:forEach>
         </td>
-        <td>
-            ${dvd.verfuegbar}
-        </td>
+        
     </tr>
 </table>
-<c:choose>      
-    <c:when test="${dvd.verfuegbar=='true'}">
-        <form action="ctrlreserve" method="POST">  
-            <input type="hidden" value="${dvd.did}" name="did">
-            <input type="submit" value="Leih mich!">
-        </form>
-    </c:when>
-    
-</c:choose>
+
 </body>
 <footer>
     <p> </p>
-    <a href="ctrlselect">zurück zur Übersicht</a>
+    <a href="ctrlselectausgeliehen">zurück zur Übersicht</a>
 </footer>
 </html>

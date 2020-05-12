@@ -8,15 +8,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
    
 </head>
-    <form method="GET" action="ctrlsearchdvd">
-        <table>
-            <tr>
-                <td>Suche:</td>
-                <td><input type="text" name="titel"></td>
-                <td><input type="submit" value="Los!"></td>
-            </tr>
-        </table>
-    </form>
+    
     <table border="1">
         <tr>
             <th>Titel</th>
@@ -30,11 +22,12 @@
                 <td>${dvd.titel}</td>
                 <td>${dvd.laenge}</td>
                 <td>${dvd.fsk}</td>
-                <td><a href="ctrlselectdetail?did=${dvd.did}">Details</a></td>
+                <td><a href="ctrlselectdetailmydvd?did=${dvd.did}">Details</a></td>
 
             </tr>
         </c:forEach>
 
     </table>
+<a href="ctrlselect">zurück zur Gesamtübersicht</a>
 </body>
 </html>
