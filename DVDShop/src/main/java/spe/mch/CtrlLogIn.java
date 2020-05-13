@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,10 +51,11 @@ public class CtrlLogIn extends HttpServlet {
                 PreparedStatement pstm = conn.prepareStatement("update kunde set sessionId=? where kid=1");
                 pstm.setString(1, sessionid);
                 pstm.executeUpdate();
-                                
+                        
+                request.setAttribute("kunde", new Kunde(1, "admin@admin.de", "admin"));
                 
                 view = request.getRequestDispatcher("ctrlselectadmin");
-                
+                view.forward(request, response);
             } catch (SQLException ex) {
                 response.getWriter().print(ex.getMessage());
             }
@@ -96,16 +95,18 @@ public class CtrlLogIn extends HttpServlet {
                     session.setAttribute("kunde", kunde);
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {
-                    view = request.getRequestDispatcher("index.html");// hier muss der Link zur LogIn Seite hin
+                    view = request.getRequestDispatcher("loginPage.html");
                 }
                 dbPool.releaseConnection(conn);
+                view.forward(request, response);
             } catch (SQLException ex) {
-                 response.getWriter().print(ex.getMessage());
-                //view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
+                 //response.getWriter().print(ex.getMessage());
+                view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
+                view.forward(request, response);
             }
         }
 
-        view.forward(request, response);
+        
 
     }
 

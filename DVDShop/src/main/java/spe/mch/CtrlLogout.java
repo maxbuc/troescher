@@ -6,10 +6,8 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,21 +42,21 @@ public class CtrlLogout extends HttpServlet {
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
         String sql = "update kunde set sessionId=null where sessionId=?";
-        PreparedStatement pstm;
         try {
-            pstm = conn.prepareStatement(sql);
+            PreparedStatement pstm = conn.prepareStatement(sql);
 
             pstm.setString(1, sessionid);
             pstm.executeUpdate();
 
-            session.removeAttribute("kunde");
-            RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
-            view.forward(request, response);
+            
+
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
 
         }
-
+        session.removeAttribute("kunde");
+        RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

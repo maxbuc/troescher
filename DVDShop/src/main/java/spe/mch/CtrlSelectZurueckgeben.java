@@ -6,14 +6,11 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,8 +65,8 @@ public class CtrlSelectZurueckgeben extends HttpServlet {
             response.getWriter().print(ex.getMessage());
         }
 
-        String sql = "select dvd.did, titel from dvd, dvd_kunde "
-                + "where dvd.did=dvd_kunde.did and zurueck is null";
+        String sql = "select dvd.did, titel, kunde.kid, email, passwort from dvd, dvd_kunde, kunde "
+                + "where dvd.did=dvd_kunde.did and dvd_kunde.kid=kunde.kid and zurueck is null";
 
         ArrayList<DVD> dvdList = new ArrayList<>();
 
@@ -78,7 +75,7 @@ public class CtrlSelectZurueckgeben extends HttpServlet {
             ResultSet rs = pstm.executeQuery();
 
             while (rs.next()) {
-                dvdList.add(new DVD(rs.getInt(1), rs.getString(2)));
+                dvdList.add(new DVD(rs.getInt(1), rs.getString(2), new Kunde(rs.getInt(3), rs.getString(4), rs.getString(5))));
             }
 
             request.setAttribute("dvdList", dvdList);

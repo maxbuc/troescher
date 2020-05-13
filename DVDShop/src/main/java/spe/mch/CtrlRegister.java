@@ -6,22 +6,26 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlDVDInsertSelect", urlPatterns = {"/ctrldvdinsertselect"})
-public class CtrlDVDInsertSelect extends HttpServlet {
+@WebServlet(name = "CtrlRegister", urlPatterns = {"/ctrlregister"})
+public class CtrlRegister extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,72 +38,47 @@ public class CtrlDVDInsertSelect extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //Abfrage, ob Admin eingeloggt ist!
-        HttpSession session = request.getSession();
-        String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-        String check = "select kid from kunde where sessionId=?";
-        try {
-            PreparedStatement pstm = conn.prepareStatement(check);
-
-            pstm.setString(1, sessionid);
-            ResultSet rs = pstm.executeQuery();
-            int kid = 0;
-            if (rs.next()) {
-                kid = rs.getInt(1);
-
-                if (kid == 0 || kid >= 2) {
-                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-                    logInView.forward(request, response);
-                }
-            }else{
-                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-                    logInView.forward(request, response);
-            }
-        } catch (SQLException ex) {
-            response.getWriter().print(ex.getMessage());
-        }
-        
-        String sql = "select * from genre";
-        String sql2 = "select * from sprache";
-
-        ArrayList<Genre> genreList = new ArrayList<>();
-        ArrayList<Sprache> spracheList = new ArrayList<>();
+        String sql1 = "select email from kunde";
+        String sql = "insert into kunde(vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort) "
+                + "values (?,?,?,?,?,?,?,?)";
 
         try {
+            PreparedStatement check = conn.prepareStatement(sql1);
+            ResultSet rs = check.executeQuery();
+            
+
             PreparedStatement pstm = conn.prepareStatement(sql);
-            ResultSet rs = pstm.executeQuery();
+            pstm.setString(1, request.getParameter("vorname"));
+            pstm.setString(2, request.getParameter("nachname"));
+            pstm.setString(3, request.getParameter("strasse"));
+            pstm.setString(4, request.getParameter("hausnummer"));
+            pstm.setString(5, request.getParameter("plz"));
+            pstm.setString(6, request.getParameter("kontonr"));
+            pstm.setString(7, request.getParameter("email"));
+            pstm.setString(8, request.getParameter("passwort"));
+            boolean insert= true;
             while (rs.next()) {
-                genreList.add(new Genre(rs.getInt("gid"), rs.getString("name")));
+                if (rs.getString("email").equals(request.getParameter("email"))) {
+                    insert=false;
+                }
             }
-            
-            
-            pstm = conn.prepareStatement(sql2);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                spracheList.add(new Sprache(rs.getInt(1), rs.getString(2)));
+            RequestDispatcher view;
+            if(insert){
+                pstm.executeUpdate();
+                view = request.getRequestDispatcher("loginPage.html");
+            }else{
+                view = request.getRequestDispatcher("register.html");
             }
 
             dbPool.releaseConnection(conn);
+
+            view.forward(request, response);
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
         }
-        
-        request.setAttribute("genreList", genreList);
-        request.setAttribute("spracheList", spracheList);
-//        for(int i = 0;i<genreList.size();i++){
-//            response.getWriter().println(genreList.get(i).getName());
-//            response.getWriter().println(genreList.get(i).getNumber());
-//        }
-//        for(int i = 0;i<spracheList.size();i++){
-//            response.getWriter().println(spracheList.get(i).getName());
-//            response.getWriter().println(spracheList.get(i).getNumber());
-//        }
-//                
-        RequestDispatcher view = request.getRequestDispatcher("dvdinsert.jsp");
-        view.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

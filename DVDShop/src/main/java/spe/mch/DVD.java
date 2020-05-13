@@ -11,6 +11,7 @@ public class DVD {
     private String genre;
     private int fsk;
     private boolean verfuegbar;
+    private Kunde kunde;
 
     public DVD(int did, String titel, int laenge, int erscheinungsjahr, ArrayList<String> sprache, String genre, int fsk) {
         this.did = did;
@@ -27,6 +28,13 @@ public class DVD {
         this.titel = titel;
     }
 
+    public DVD(int did, String titel, Kunde kunde) {
+        this.did = did;
+        this.titel = titel;
+        this.kunde = kunde;
+    }
+
+    
     
     
     public DVD() {
@@ -95,6 +103,12 @@ public class DVD {
     public void setVerfuegbar(boolean verfuegbar) {
         this.verfuegbar = verfuegbar;
     }
+
+    public String getKunde() {
+        return kunde.getEmail();
+    }
+
+    
 
     
    

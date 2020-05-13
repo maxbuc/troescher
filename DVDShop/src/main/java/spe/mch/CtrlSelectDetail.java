@@ -115,6 +115,14 @@ public class CtrlSelectDetail extends HttpServlet {
             }
             
             
+            int anzahlVerleihe=0;
+            sql="select count(*) from dvd_kunde where did=?";
+            pstm=conn.prepareStatement(sql);
+            pstm.setInt(1, did);
+            rs = pstm.executeQuery();
+            rs.next();
+            anzahlVerleihe=rs.getInt(1);
+            request.setAttribute("anzahl", anzahlVerleihe);
             
             
             dbPool.releaseConnection(conn);

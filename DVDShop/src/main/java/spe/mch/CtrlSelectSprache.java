@@ -6,7 +6,11 @@
 package spe.mch;
 
 import java.io.IOException;
-import java.sql.*;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlDVDInsertSelect", urlPatterns = {"/ctrldvdinsertselect"})
-public class CtrlDVDInsertSelect extends HttpServlet {
+@WebServlet(name = "CtrlSelectSprache", urlPatterns = {"/ctrlselectsprache"})
+public class CtrlSelectSprache extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +38,6 @@ public class CtrlDVDInsertSelect extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         //Abfrage, ob Admin eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
@@ -61,44 +64,27 @@ public class CtrlDVDInsertSelect extends HttpServlet {
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
         }
-        
-        String sql = "select * from genre";
-        String sql2 = "select * from sprache";
+        ArrayList<String> spracheList = new ArrayList<>();
 
-        ArrayList<Genre> genreList = new ArrayList<>();
-        ArrayList<Sprache> spracheList = new ArrayList<>();
+        String sql = "select name from sprache order by sid";
 
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()) {
-                genreList.add(new Genre(rs.getInt("gid"), rs.getString("name")));
-            }
-            
-            
-            pstm = conn.prepareStatement(sql2);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                spracheList.add(new Sprache(rs.getInt(1), rs.getString(2)));
-            }
 
+            while (rs.next()) {
+                spracheList.add(rs.getString(1));
+            }
             dbPool.releaseConnection(conn);
-        } catch (SQLException ex) {
-            response.getWriter().print(ex.getMessage());
+
+
+        } catch (SQLException e) {
+            response.getWriter().print(e.getMessage());
         }
+
         
-        request.setAttribute("genreList", genreList);
         request.setAttribute("spracheList", spracheList);
-//        for(int i = 0;i<genreList.size();i++){
-//            response.getWriter().println(genreList.get(i).getName());
-//            response.getWriter().println(genreList.get(i).getNumber());
-//        }
-//        for(int i = 0;i<spracheList.size();i++){
-//            response.getWriter().println(spracheList.get(i).getName());
-//            response.getWriter().println(spracheList.get(i).getNumber());
-//        }
-//                
-        RequestDispatcher view = request.getRequestDispatcher("dvdinsert.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("spracheinsert.jsp");
         view.forward(request, response);
     }
 

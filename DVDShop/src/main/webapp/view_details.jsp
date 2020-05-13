@@ -8,6 +8,7 @@
         <th>FSK</th>
         <th>Sprachen</th>
         <th>Verfügbarkeit</th>
+        
     </tr>
 
     <tr>
@@ -23,6 +24,7 @@
         <td>
             ${dvd.verfuegbar}
         </td>
+        <td>Wurde schon ${anzahl} mal verliehen</td>
     </tr>
 </table>
 <c:choose>      
