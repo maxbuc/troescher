@@ -5,18 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href=https://fonts.googleapis.com/css?family=Teko">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
    
 </head>
     <form method="GET" action="ctrlsearchdvd">
-        <table>
-            <tr>
-                <td>Suche:</td>
-                <td><input type="text" name="titel"></td>
-                <td><input type="submit" value="Los!"></td>
-            </tr>
-        </table>
+	<input type="text" name="titel" placeholder="Suche...">
+        <input type="submit" value="Suche">
     </form>
+
     <table border="1">
         <tr>
             <th>Titel</th>
