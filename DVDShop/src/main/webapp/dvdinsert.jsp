@@ -1,4 +1,4 @@
-<%@include file="WEB-INF/jspf/header.jspf" %>  
+<%@include file="WEB-INF/jspf/header_admin.jspf" %>
 <h1>Neue DVD</h1>
 
 <form method="POST" action="ctrldvdinsert">

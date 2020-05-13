@@ -11,25 +11,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
+        
         <title>DVDShop</title>
     </head>
     <body>
-        <h1> Hallo,${kunde.email} !</h1>
+        <h1> Hallo, Administrator !</h1>
         <div class="flex">
 
-            <img alt="" src="images/logi_hell_copy.png" width="400" height="100">
-        </div>
-        <ul>
-            <li><a href="ctrlselect">Home</a></li>
-            <li><a href="ueberUns.html">Über uns</a></li>
-            <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
-            <li><a href="ctrlselectausgeliehen">Meine DVDs</a></li>
+		<img alt="" src="images/logi_hell_copy.png" width="400" height="100">
+	</div>
 
-            <li><a href="contact.html">Kontakt</a></li>
-            <li><a href="ctrllogout">LogOut</a></li>
-        </ul>
+            <ul>
+                <li><a href="ctrlselectadmin">Übersicht</a></li>
+                <li><a href="dvdinsert.jsp">DVD hinzufügen</a></li>
+                <li><a href="ctrlselectzurueckgeben">DVD zurück</a></li>
+                <li><a href="ctrllogout">LogOut</a></li>
 
-
+            </ul>
+        
+        
     </body>
 </html>
+        

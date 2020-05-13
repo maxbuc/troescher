@@ -1,4 +1,4 @@
-<%@include file="WEB-INF/jspf/header.jspf" %>
+<%@include file="WEB-INF/jspf/header_admin.jspf" %>
         <h1>DVD zurückgeben</h1>
         <table border="1">
         <tr>
