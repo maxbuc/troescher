@@ -56,7 +56,7 @@ public class CtrlSelect extends HttpServlet {
 //            if (rs.next()) {
 //                kid = rs.getInt(1);
 //            }
-//            if (kid < 2) {
+//            if (kid <= 1) {
 //                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
 //                logInView.forward(request, response);
 //            }
