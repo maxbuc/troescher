@@ -45,32 +45,35 @@ public class CtrlSelectAdmin extends HttpServlet {
         String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-        String sql = "select kid from kunde where sessionId=?";
-        PreparedStatement pstm;
-//        try {
-//            pstm = conn.prepareStatement(sql);
-//
-//            pstm.setString(1, sessionid);
-//            ResultSet rs = pstm.executeQuery();
-//            int kid = 0;
-//            if (rs.next()) {
-//                kid = rs.getInt(1);
-//            }
-//            if (kid == 0 || kid >1) {
-//                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-//                logInView.forward(request, response);
-//            }
-//        } catch (SQLException ex) {
-//            response.getWriter().print(ex.getMessage());
-//        }
+        String check = "select kid from kunde where sessionId=?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            int kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0 || kid >= 2) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            }else{
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
 
         ArrayList<DVD> dvdList = new ArrayList<>();
 
-        sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk from dvd, genre, sprache, dvd_sprache where dvd.gid=genre.gid and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid order by dvd.did";
+        String sql = "select dvd.did, titel, laenge, erscheinungsjahr, sprache.name as sprache_name, genre.name as genre_name, fsk from dvd, genre, sprache, dvd_sprache where dvd.gid=genre.gid and dvd.did=dvd_sprache.did and dvd_sprache.sid=sprache.sid order by dvd.did";
 
         ArrayList<DVD> akku = new ArrayList<>();
         try {
-           pstm = conn.prepareStatement(sql);
+            PreparedStatement pstm = conn.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
 
             int did = 0;

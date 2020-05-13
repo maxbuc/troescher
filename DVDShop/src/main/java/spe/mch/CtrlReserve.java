@@ -39,27 +39,34 @@ public class CtrlReserve extends HttpServlet {
         //Abfrage, ob User eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
-        Kunde sessionKunde = null;
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        int kid=0;
         try {
-            sessionKunde = (Kunde) session.getAttribute("kunde");
+            PreparedStatement pstm = conn.prepareStatement(check);
 
-            if (!sessionKunde.getSessionid().equals(sessionid)) {
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+            }
+            if (kid <= 1) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);
             }
-        } catch (NullPointerException e) {
-            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-            logInView.forward(request, response);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
         }
 
         String sql = "insert into dvd_kunde (did, kid, ausgeliehen) values (?,?, current_date)";
-        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-        Connection conn = dbPool.getConnection();
+        
 
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, Integer.parseInt(request.getParameter("did")));
-            pstm.setInt(2, sessionKunde.getKid());
+            pstm.setInt(2, kid);
             pstm.executeUpdate();
 
             RequestDispatcher view = request.getRequestDispatcher("ctrlselect");

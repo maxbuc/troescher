@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,10 +34,36 @@ public class CtrlDVDInsertSelect extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sql = "select * from genre";
-        String sql2 = "select * from sprache";
+        
+        //Abfrage, ob Admin eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            int kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0 || kid >= 2) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            }else{
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+        
+        String sql = "select * from genre";
+        String sql2 = "select * from sprache";
 
         ArrayList<Genre> genreList = new ArrayList<>();
         ArrayList<Sprache> spracheList = new ArrayList<>();

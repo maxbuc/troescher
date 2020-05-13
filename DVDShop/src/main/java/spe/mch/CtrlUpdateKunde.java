@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -40,17 +41,25 @@ public class CtrlUpdateKunde extends HttpServlet {
         //Abfrage, ob User eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
-        Kunde sessionKunde = null;
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        int kid=0;
         try {
-            sessionKunde = (Kunde) session.getAttribute("kunde");
-            
-            if (!sessionKunde.getSessionid().equals(sessionid)) {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+            }
+            if (kid <= 1) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);
             }
-        } catch (NullPointerException e) {
-            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-            logInView.forward(request, response);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
         }
         
         String sql = "update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?";
@@ -65,7 +74,7 @@ public class CtrlUpdateKunde extends HttpServlet {
         String kontonr = request.getParameter("kontonr");
         String email = request.getParameter("email");
         String passwort = request.getParameter("passwort");
-        int kid = Integer.parseInt(request.getParameter("kid"));
+        
         
         kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
         kunde.setSessionid(sessionid);
@@ -73,8 +82,6 @@ public class CtrlUpdateKunde extends HttpServlet {
         session.removeAttribute("kunde");
         session.setAttribute("kunde", kunde);
 
-        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-        Connection conn = dbPool.getConnection();
 
         try {
             PreparedStatement pstm = conn.prepareStatement("update kunde set vorname=?, nachname=?, strasse=?, hausnummer=?, plz=?, kontonr=?, email=?, passwort=? where kid =?");

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,9 +38,34 @@ public class CtrlZurueckgeben extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String sql = "update dvd_kunde set zurueck = current_date where did=? and zurueck is null";
+        //Abfrage, ob Admin eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            int kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0 || kid >= 2) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            }else{
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+        
+        String sql = "update dvd_kunde set zurueck = current_date where did=? and zurueck is null";
 
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);

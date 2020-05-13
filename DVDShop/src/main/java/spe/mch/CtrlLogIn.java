@@ -48,8 +48,7 @@ public class CtrlLogIn extends HttpServlet {
         HttpSession session = request.getSession();
         String sessionid = session.getId();
 
-        String admin_email = "admin@admin.de";
-        if (mUsername.equals(admin_email) && mPasswort.equals("admin")) {
+        if ((mUsername.equals("admin@admin.de")||mUsername.equals("admin%40admin.de")) && mPasswort.equals("admin")) {
             try {
                 PreparedStatement pstm = conn.prepareStatement("update kunde set sessionId=? where kid=1");
                 pstm.setString(1, sessionid);
@@ -59,7 +58,7 @@ public class CtrlLogIn extends HttpServlet {
                 view = request.getRequestDispatcher("ctrlselectadmin");
                 
             } catch (SQLException ex) {
-                
+                response.getWriter().print(ex.getMessage());
             }
             
         } else {
@@ -76,14 +75,14 @@ public class CtrlLogIn extends HttpServlet {
                 
 
                 int kid = rs.getInt("kid");
-//                String vorname = rs.getString("vorname");
-//                String nachname = rs.getString("nachname");
-//                String strasse = rs.getString("strasse");
-//                String hausnummer = rs.getString("hausnummer");
-//                String plz = rs.getString("plz");
-//                String kontonr = rs.getString("kontonr");
-//                String email = rs.getString("email");
-//                String passwort = rs.getString("passwort");
+                String vorname = rs.getString("vorname");
+                String nachname = rs.getString("nachname");
+                String strasse = rs.getString("strasse");
+                String hausnummer = rs.getString("hausnummer");
+                String plz = rs.getString("plz");
+                String kontonr = rs.getString("kontonr");
+                String email = rs.getString("email");
+                String passwort = rs.getString("passwort");
 
                 if (rs.getString("passwort").equals(mPasswort)) {
                     
@@ -92,17 +91,17 @@ public class CtrlLogIn extends HttpServlet {
                     pstm.setInt(2, kid);
                     pstm.executeUpdate();
 
-//                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-//                    kunde.setSessionid(sessionid);
-//                    session.setAttribute("kunde", kunde);
+                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
+                    kunde.setSessionid(sessionid);
+                    session.setAttribute("kunde", kunde);
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {
-                    view = request.getRequestDispatcher("loginPage.html");// hier muss der Link zur LogIn Seite hin
+                    view = request.getRequestDispatcher("index.html");// hier muss der Link zur LogIn Seite hin
                 }
                 dbPool.releaseConnection(conn);
             } catch (SQLException ex) {
-                // response.getWriter().print(ex.getMessage());
-                view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
+                 response.getWriter().print(ex.getMessage());
+                //view = request.getRequestDispatcher("loginPage.html");//hier muss der Link zur LogIn Seite hin
             }
         }
 

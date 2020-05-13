@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,35 +39,59 @@ public class CtrlDeleteSelectDVD extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            int did = Integer.parseInt(request.getParameter("did"));
-            
-            ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-            Connection conn = dbPool.getConnection();
-        try {    
+        //Abfrage, ob Admin eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            int kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0 || kid >= 2) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            } else {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+
+        int did = Integer.parseInt(request.getParameter("did"));
+
+        try {
             String sql = "delete from dvd where did = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, did);
             pstm.executeUpdate();
-            
+
             sql = "delete from dvd_sprache where did = ?";
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, did);
             pstm.executeUpdate();
-            
+
             sql = "delete from dvd_kunde where did = ?";
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, did);
             pstm.executeUpdate();
-            
+
             dbPool.releaseConnection(conn);
             RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
             view.forward(request, response);
-        
+
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

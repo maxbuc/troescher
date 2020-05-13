@@ -41,17 +41,25 @@ public class CtrlSelectAusgeliehen extends HttpServlet {
         //Abfrage, ob User eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
-        Kunde sessionKunde = null;
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        int kid=0;
         try {
-            sessionKunde = (Kunde) session.getAttribute("kunde");
-            
-            if (!sessionKunde.getSessionid().equals(sessionid)) {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+            }
+            if (kid <= 1) {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                 logInView.forward(request, response);
             }
-        } catch (NullPointerException e) {
-            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-            logInView.forward(request, response);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
         }
                 
 
@@ -61,13 +69,11 @@ public class CtrlSelectAusgeliehen extends HttpServlet {
                 + "and dvd_kunde.zurueck is null "
                 + "order by dvd.did";
 
-        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
-        Connection conn = dbPool.getConnection();
         ArrayList<DVD> akku = new ArrayList<>();
         ArrayList<DVD> dvdList = new ArrayList<>();
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setInt(1, sessionKunde.getKid());
+            pstm.setInt(1, kid);
             ResultSet rs = pstm.executeQuery();
 
             int did = 0;

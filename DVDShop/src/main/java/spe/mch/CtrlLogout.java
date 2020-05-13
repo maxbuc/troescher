@@ -7,6 +7,10 @@ package spe.mch;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,24 +40,25 @@ public class CtrlLogout extends HttpServlet {
         HttpSession session = request.getSession();
         String sessionid = session.getId();
         Kunde sessionKunde = null;
+
+        ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
+        Connection conn = dbPool.getConnection();
+        String sql = "update kunde set sessionId=null where sessionId=?";
+        PreparedStatement pstm;
         try {
-            sessionKunde = (Kunde) session.getAttribute("kunde");
-            
-            if (!sessionKunde.getSessionid().equals(sessionid)) {
-                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-                logInView.forward(request, response);
-            }
-        } catch (NullPointerException e) {
-            RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-            logInView.forward(request, response);
+            pstm = conn.prepareStatement(sql);
+
+            pstm.setString(1, sessionid);
+            pstm.executeUpdate();
+
+            session.removeAttribute("kunde");
+            RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
+            view.forward(request, response);
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+
         }
-        
-        session.removeAttribute("kunde");
-        
-        
-        
-        RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
-        view.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

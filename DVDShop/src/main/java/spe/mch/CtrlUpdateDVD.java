@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,16 +38,41 @@ public class CtrlUpdateDVD extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int did = Integer.parseInt(request.getParameter("did"));
-        
-        String sql = "update dvd set titel=?, laenge=?, erscheinungsjahr=?, gid=?, fsk=? where did=?";
 
+        //Abfrage, ob Admin eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
+        String check = "select kid from kunde where sessionId=?";
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            int kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0 || kid >= 2) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            } else {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+
+        int did = Integer.parseInt(request.getParameter("did"));
+
+        String sql = "update dvd set titel=?, laenge=?, erscheinungsjahr=?, gid=?, fsk=? where did=?";
 
         String[] sprachen = request.getParameterValues("sprache");
         ArrayList<Integer> sprachenList = new ArrayList<>();
-        for(int i = 0; i<sprachen.length;i++){
+        for (int i = 0; i < sprachen.length; i++) {
             sprachenList.add(Integer.parseInt(sprachen[i]));
         }
         try {
@@ -60,14 +86,13 @@ public class CtrlUpdateDVD extends HttpServlet {
 
             pstm.executeUpdate();
             pstm = null;
-                
+
             //alles aus dvd_sprache mit selber did löschen
             sql = "delete from dvd_sprache where did=?";
             pstm = conn.prepareStatement(sql);
             pstm.setInt(1, did);
             pstm.executeUpdate();
-            
-            
+
             for (int i = 0; i < sprachenList.size(); i++) {
                 sql = "insert into dvd_sprache values (?,?)";
                 pstm = conn.prepareStatement(sql);
@@ -75,7 +100,6 @@ public class CtrlUpdateDVD extends HttpServlet {
                 pstm.setInt(2, sprachenList.get(i));
                 pstm.executeUpdate();
             }
-            
 
             dbPool.releaseConnection(conn);
             RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
@@ -83,7 +107,7 @@ public class CtrlUpdateDVD extends HttpServlet {
         } catch (SQLException ex) {
             for (int i = 0; i < sprachen.length; i++) {
                 response.getWriter().println(sprachen[i]);
-                
+
             }
             response.getWriter().print(ex.getMessage());
         }
