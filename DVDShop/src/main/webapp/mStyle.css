@@ -30,6 +30,7 @@ a       {color:red;}
     padding-bottom: 25px;
     border: 2px solid white;
     overflow: visible;
+    border-radius: 5px;
 
 }
 

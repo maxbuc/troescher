@@ -9,10 +9,162 @@ and open the template in the editor.
         <title>Neuer Kunde</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        
+        <style>
+            body {background-color: #009999;
+	animation-name: first;
+	animation-duration: 15s;
+	animation-iteration-count: infinite; /*durchgehend*/
+	animation-direction: alternate;
+	animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
+	}
+        
+        @keyframes first{
+	0% {background-color: #00C3C3;}
+	25% {background-color: #00A7A7;}
+	50% {background-color: #008A8A;}
+	75% {background-color: #00ACAC;}
+	100% {background-color: #088A85;}
+    }
+    
+    .flex { 
+    left: 35%;
+    width: 6em;
+    position: relative;
+    z-index: 10;
+    }
+        
+        table{
+    width:100%;
+    position:relative;
+    bottom: 90px;
+    left: 100px;
+    font-family: "Teko";
+	font-size: 20px;
+    
+    }
+    
+    .white {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: 2px solid white;
+    overflow: visible;
+    border-radius: 5px;
+
+    }
+
+    .yellow {
+    padding-top: 5px;
+    padding-bottom: 50px;
+    border: 2px solid white;
+    background-color: white;
+    overflow: visible;
+    }
+    
+    h {
+        position: relative;
+        vertical-align: middle;
+        left: 33%;
+        top: 25px;
+        font-family: "Teko";
+	font-size: 35px;
+    }
+    
+    li {
+    position:relative;
+    top: -170px; /*Höhe*/
+    left: -40px;
+    list-style-type: none;
+  float: left;
+  font-family: "Teko";
+  font-size: 23px;
+  margin-top: 165px;
+  margin-left: 6px;
+  backround-color: white;
+}
+
+li a {
+  display: block;
+  color: #009999; /*Farbe Buchstaben*/
+  background-color: white;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+  margin-top: 0px;
+  font-family: "Teko";
+  font-size: 23px;
+  float: left;
+}
+
+li a:hover {
+   background-color: #48D1CC; /*wenn man über Buttons fährt*/
+  color: white;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block; 
+  font-family: "Teko";
+  font-size: 23px;
+}
+input {
+  width: 40%;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+ 
+  
+}
+input[type=submit] /*Button Regestrieren*/{
+   position: relative;
+   bottom: 40px; /*Button ausrichten*/
+   left:550px;
+  width: 10%;
+  background-color: white;
+  color: #009999;
+  padding: 5px 25px; /*Größe, Breite,Länge*/
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Teko";
+  font-size: 20px;
+  text-align:center;
+}
+
+input[type=submit]:hover {
+  background-color: white;/*Farbe wenn man über suchebutton fährt*/   
+  color: #48D1CC;
+}
+
+.container {
+  margin-top: 30px;
+  margin-bottom: 70px;
+  border-radius: 5px;
+  background-color: #48D1CC;
+
+}
+
+        </style>
     </head>
     <body>
+                <div class="white">
+            <div class="yellow">
+                <div class="flex">
+                    <img alt="" src="images/logi_hell_copy.png" width="400" height="100">
+                </div>
+                <h>Lege hier bitte dein eigenes M.i.P. Konto an !</h>
+                <ul>
+                    <li><a href="ctrlselect">Zurück zum Login</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+        <div class="white2"></div>
         <form method="POST" action="ctrlregister">
-
+            <div class="first">
+                <div class="mittig">
             <table>
                 <tr>
                     <td><label for="vorname">Vorname:</label></td>
@@ -46,12 +198,16 @@ and open the template in the editor.
                     <td><label for="passwort">Passwort:</label></td>
                     <td><input type="password" name="passwort" ></td>
                 </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value="Registrieren"></td>
-                </tr>
+                <!--<tr>
+                    <td colspan="2"></td>
+                </tr>-->
             </table>
-
+                    
+                </div>
+            </div>
             
         </form>
+        </div>
+        <input type="submit" value="Registrieren">
     </body>
 </html>

@@ -2,7 +2,18 @@ body {
 	background: white;
 	font-family: "Teko";
 	font-size: 20px;}
+.a {
+    
+    position: relative;
+    margin-top: 55px;
+    margin-left: 595px;
+    color: #009999;
 
+}
+
+.a:hover {
+    color: #48D1CC;
+}
 /*Bild Startseite center position*/
 .flex { 
 	margin-left: 30%;
