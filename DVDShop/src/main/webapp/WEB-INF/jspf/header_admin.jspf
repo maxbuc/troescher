@@ -11,27 +11,82 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        
         <title>DVDShop</title>
+        <style>
+            h1 {
+                position:relative;
+                left: 10px;
+                top: 20px;
+            }
+            table {
+                position:relative;
+                margin-top: -100px;
+            }
+            body {background-color: #009999;
+                  animation-name: first;
+                  animation-duration: 15s;
+                  animation-iteration-count: infinite; /*durchgehend*/
+                  animation-direction: alternate;
+                  animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
+            }
+
+            @keyframes first{
+                0% {background-color: #00C3C3;}
+                25% {background-color: #00A7A7;}
+                50% {background-color: #008A8A;}
+                75% {background-color: #00ACAC;}
+                100% {background-color: #088A85;}
+            }
+            
+            .flex { 
+                left: 35%;
+                width: 6em;
+                position: relative;
+                z-index: 10;
+            }
+            
+             .white {
+                padding-top: 25px;
+                padding-bottom: 25px;
+                border: 2px solid white;
+                overflow: visible;
+                border-radius: 5px;
+
+            }
+
+            .yellow {
+                padding-top: 5px;
+
+                border: 2px solid white;
+                background-color: white;
+                overflow: visible;
+            }
+            
+            .rechts {
+            position:relative;
+            left: 550px;
+            top: -390px;
+            overflow: visible; 
+            }
+        </style>
     </head>
     <body>
         <h1> Hallo, Administrator !</h1>
+        <div class="white">
+            <div class="yellow">
         <div class="flex">
-
 		<img alt="" src="images/logi_hell_copy.png" width="400" height="100">
 	</div>
-
             <ul>
                 <li><a href="ctrlselectadmin">Übersicht</a></li>
                 <li><a href="ctrldvdinsertselect">DVD hinzufügen</a></li>
                 <li><a href="ctrlselectgenre">Genre Übersicht</a></li>
                 <li><a href="ctrlselectsprache">Sprachen Übersicht</a></li>
                 <li><a href="ctrlselectzurueckgeben">DVD zurück</a></li>
-                <li><a href="ctrllogout">LogOut</a></li>
-
             </ul>
-        
-        
+                <li><a href="ctrllogout" class="rechts">LogOut</a></li>
+         </div>
+        </div>
     </body>
 </html>
         

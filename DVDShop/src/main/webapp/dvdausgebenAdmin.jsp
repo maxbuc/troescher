@@ -1,5 +1,4 @@
 <%@include file="WEB-INF/jspf/header_admin.jspf" %>   
-<h1>Unser DVD-Shop</h1>
         <table border="1">
             <tr>
                 <th>Titel</th>

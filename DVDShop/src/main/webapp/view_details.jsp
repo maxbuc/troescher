@@ -28,7 +28,7 @@
 
       input[type=submit] /*Button Leih mich!*/{
                 position: relative;
-                top: -100px; /*Button ausrichten*/
+                top: -90px; /*Button ausrichten*/
                 left: 550px;
                 width: 10%;
                 background-color: white;

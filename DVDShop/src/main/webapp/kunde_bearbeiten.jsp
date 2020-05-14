@@ -11,24 +11,18 @@
         }
         
         table{
-            padding-top: 10px;
-                padding-bottom: 10px;
-            padding-left: 10px;
-            padding-right: 10 px;
                 width:60%;
                 position:relative;
-                top: 0px;
-                left: 5px;
+                top: -40px;
+                left: 35px;
                 font-family: "Teko";
                 font-size: 20px;
-                border: none;
+                border:3px solid #48D1CC;
             }
            table td, table th{
-            padding: 10px 20px;
-            border: none;
+            padding: 10px 10px;
+            border: 1px solid #48D1CC;;
             font-size: 17px;
-
-
         }
 
         table tr {
@@ -52,6 +46,7 @@
 
             table td {
                 text-align: left;
+                border: 1px solid #48D1CC;
             }
 
             .kleiner {
@@ -60,21 +55,17 @@
             .auchKleiner {
                 width: 50%;
             }
-
-            table th {
-                background-color: #666;
-                color: black;
-            }
               .container {
-                padding: 30px;
+                padding: 20px 20px;
                 position: relative;
                 left: 285px;
                 margin-top: 30px;
-                margin-bottom: 60px;
+                margin-bottom: 75px;
                 border-radius: 5px;
                 background-color: #48D1CC;
-                border: 2px solid white;
+                border: 2px solid white; /*richtig*/
                 width: 50%;
+                heidth: 50%;
 
             }
             input {
@@ -100,8 +91,8 @@
             
             input[type=submit] /*Button Speichern*/{
                 position: relative;
-                top: 100px;
-                left: 150px;
+                top: 0px;
+                left: 250px;
                 width: 20%;
                 background-color: white;
                 color: #009999;
@@ -113,17 +104,12 @@
                 font-size: 20px;
                 text-align:center;
             }
-
-            input[type=submit]:hover {
-                background-color: white;/*Farbe wenn man über suchebutton fährt*/   
-                color: #48D1CC;
-                border-radius: 5px;
-            }
+            
             table tr:hover {
-    background-color: #48D1CC;
-    color: white;
-    
-}
+            background-color: #48D1CC;
+            color: white;
+
+        }
 
     </style>
         <h1>Mein Konto</h1>
@@ -131,7 +117,7 @@
         <form method="POST" action="ctrlupdatekunde">
             <input type="hidden" name="kid" value="${kunde.kid}">
             
-                <table height="50%">
+                <table border=1 height="50%">
                     <tr>
                         <td><label for="vorname">Vorname:</label></td>
                         <td><input type="text" name="vorname" value="${kunde.vorname}" required="required"></td>                        

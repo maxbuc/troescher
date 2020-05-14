@@ -1,5 +1,5 @@
 <%@include file="WEB-INF/jspf/header_admin.jspf" %>
-        <h1>DVD zurückgeben</h1>
+
         <table border="1">
         <tr>
             <th>Titel</th>
@@ -17,7 +17,5 @@
         </c:forEach>
 
     </table>
-        
-        <a href="ctrlselectadmin">zurück zur Gesamtübersicht</a>
     </body>
 </html>
