@@ -36,7 +36,7 @@ public class CtrlDVDInsert extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //Abfrage, ob Admin eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
@@ -56,25 +56,25 @@ public class CtrlDVDInsert extends HttpServlet {
                     RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
                     logInView.forward(request, response);
                 }
-            }else{
+            } else {
                 RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
-                    logInView.forward(request, response);
+                logInView.forward(request, response);
             }
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
         }
-        
+
         String sql = "insert into dvd (titel, laenge, erscheinungsjahr, gid, fsk) values (?,?,?,?,?)";
-
-
-        String[] sprachen = request.getParameterValues("sprache");
+        String[] sprachen=new String[1];
+        sprachen[0]="1";
+        if (request.getParameter("sprache") != null) {
+            sprachen = request.getParameterValues("sprache");
+        }
         ArrayList<Integer> sprachenList = new ArrayList<>();
-        for(int i = 0; i<sprachen.length;i++){
+        for (int i = 0; i < sprachen.length; i++) {
             sprachenList.add(Integer.parseInt(sprachen[i]));
         }
-        if(sprachenList.get(0)==null){
-            sprachenList.add(1);
-        }
+
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, request.getParameter("titel"));
@@ -85,7 +85,7 @@ public class CtrlDVDInsert extends HttpServlet {
 
             pstm.executeUpdate();
             pstm = null;
-                    
+
             int did = 0;
             sql = "select did from dvd where titel=? and erscheinungsjahr = ?";
             pstm = conn.prepareStatement(sql);
@@ -96,8 +96,8 @@ public class CtrlDVDInsert extends HttpServlet {
             did = rs.getInt("did");
 
             pstm = null;
-            rs=null;
-            
+            rs = null;
+
             for (int i = 0; i < sprachenList.size(); i++) {
                 sql = "insert into dvd_sprache values (?,?)";
                 pstm = conn.prepareStatement(sql);
@@ -105,14 +105,13 @@ public class CtrlDVDInsert extends HttpServlet {
                 pstm.setInt(2, sprachenList.get(i));
                 pstm.executeUpdate();
             }
-            
 
             dbPool.releaseConnection(conn);
             RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
             view.forward(request, response);
         } catch (SQLException ex) {
-            
-        }catch(NumberFormatException e){
+
+        } catch (NumberFormatException e) {
             RequestDispatcher view = request.getRequestDispatcher("ctrldvdinsertselect");
             view.forward(request, response);
         }
