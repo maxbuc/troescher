@@ -17,7 +17,7 @@
 <form method="POST" action="ctrlgenreinsert">
     <table>
         <tr><form method="POST" action="ctrlspracheinsert">
-            <td><input type="text" name="name" placeholder="Neues Genre einfügen"></td>
+            <td><input type="text" name="name" placeholder="Neues Genre einfügen" required="required"></td>
             <td><input type="submit" value="Hinzufügen"></td>
             </tr>
     </table>

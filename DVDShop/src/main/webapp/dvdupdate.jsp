@@ -7,20 +7,20 @@
         <table>
             <tr>
                 <td><label for="titel">Titel:</label></td>
-                <td><input type="text" name="titel" value="${dvd.titel}"></td>                        
+                <td><input type="text" name="titel" value="${dvd.titel}" required="required"></td>                        
             </tr>
             <tr>
                 <td><label for="laenge">Länge:</label></td>
-                <td><input type="text" name="laenge" value="${dvd.laenge}"></td>                        
+                <td><input type="text" name="laenge" value="${dvd.laenge}" required="required"></td>                        
             </tr>
             <tr>
                 <td><label for="erscheinungsjahr">Erscheinungsjahr:</label></td>
-                <td><input type="text" name="erscheinungsjahr" value="${dvd.erscheinungsjahr}"></td>                        
+                <td><input type="text" name="erscheinungsjahr" value="${dvd.erscheinungsjahr}" required="required"></td>                        
             </tr>
 
             <tr>
                 <td><label for="genre">Genre:</label></td>
-                <td><select name="gid" >
+                <td><select name="gid" required="required">
                         <c:forEach var="genre" items="${genreList}">
                             <option value="${genre.number}">${genre.name}</option>
                         </c:forEach>
@@ -43,7 +43,7 @@
 
             <tr>
                 <td><label for="fsk">FSK:</label></td>
-                <td><select name="fsk">
+                <td><select name="fsk" required="required">
                         <c:forEach var="fsk" items="${fskList}">
                             <option value="${fsk}">${fsk}</option>
                         </c:forEach>
