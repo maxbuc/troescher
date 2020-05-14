@@ -1,8 +1,77 @@
 <%@include file="WEB-INF/jspf/header.jspf" %>
-        <h1>Ihr Gästebucheintrag</h1>
+<head>
+    <style>
+        h1 {
+            position: relative;
+                vertical-align: middle;
+                left: 33%;
+                top: 25px;
+                font-family: "Teko";
+                font-size: 35px;
+        }
+        
+        table{
+                width:60%;
+                position:relative;
+                top: 0px;
+                left: 5px;
+                font-family: "Teko";
+                font-size: 20px;
+                border: none;
+                
+
+            }
+            table.doFixed {
+                table-layout: fixed;
+            }
+            /*.doAutoWidth {
+           width: auto;
+        }*/
+
+
+            table td {
+                text-align: left;
+            }
+
+            .kleiner {
+                width: 20%;
+            }
+            .auchKleiner {
+                width: 50%;
+            }
+
+            table th {
+                background-color: #666;
+                color: white;
+            }
+              .container {
+                padding: 30px;
+                position: relative;
+                left: 300px;
+                margin-top: 30px;
+                margin-bottom: 60px;
+                border-radius: 5px;
+                background-color: #48D1CC;
+                border: 2px solid white;
+                width: 50%;
+
+            }
+            input {
+                width: 80%;
+                padding: 6px;
+                border: 1px solid black;
+                border-radius: 5px;
+                box-sizing: border-box;
+
+
+            }
+
+    </style>
+        <h1>Mein Konto</h1>
+        <div class="container">
         <form method="POST" action="ctrlupdatekunde">
             <input type="hidden" name="kid" value="${kunde.kid}">
-                <table>
+                <table height="50%">
                     <tr>
                         <td><label for="vorname">Vorname:</label></td>
                         <td><input type="text" name="vorname" value="${kunde.vorname}" required="required"></td>                        
@@ -36,14 +105,13 @@
                      <tr>
                         <td><label for="passwort">Passwort:</label></td>
                         <td><input type="text" name="passwort" value="${kunde.passwort}" required="required"></td>                        
-                    </tr>
-                    
+                     </tr>
                     <tr>
                         <td colspan="2"><input type="submit" value="Speichern"></td>
                     </tr>
-                    
                 </table>
         </form>
+        </div>
                     
     </body>
 </html>
