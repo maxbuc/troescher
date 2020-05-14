@@ -274,7 +274,7 @@ and open the template in the editor.
 
 
             <div class="white2"></div>
-            <form method="POST" action="ctrllogin">
+            <form method="POST" action="ctrlregister">
 
                 <table width="50%">
                     <tr>
@@ -311,22 +311,22 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td class="kleiner"><label for="passwort">Passwort:</label></td>
-                        <td class="auchKleiner"><input type="password" name="passwort" required></td>
+                        <td class="auchKleiner"><input type="password" id="myInput" name="passwort" required></td>
                     </tr>
 
 
                 </table>
 
                 <input type="submit" value="Registrieren">
-
+                <label class="switch">
+                    <input type="checkbox" onclick="myFunction()">
+                    <span class="slider round"></span>
+                </label>
+                <p>Passwort ansehen</p>
+                <p></p>
+                <p></p>
             </form>
-            <label class="switch">
-                <input type="checkbox" onclick="myFunction()">
-                <span class="slider round"></span>
-            </label>
-            <p>Passwort ansehen</p>
-            <p></p>
-            <p></p>
+
 
             <script>
                 function myFunction() {
@@ -338,10 +338,7 @@ and open the template in the editor.
                     }
                 }
             </script>
-<<<<<<< HEAD
-=======
 
->>>>>>> ec95cb98326b29ff85db8da1b4c7a986b9749944
         </div>
 
     </body>
