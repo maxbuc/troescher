@@ -62,8 +62,41 @@
                 border: 1px solid black;
                 border-radius: 5px;
                 box-sizing: border-box;
+            }
+            input[type=text]{
+                width: 80%;
+                padding: 6px;
+                border: 1px solid black;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
 
+            input[type=submit]:hover {
+                background-color: white;/*Farbe wenn man über suchebutton fährt*/   
+                color: #48D1CC;
+                border-radius: 5px;
+            }
+            }
+            input[type=submit] /*Button Regestrieren*/{
+                position: relative;
+                bottom: 40px; /*Button ausrichten*/
+                left:580px;
+                width: 10%;
+                background-color: white;
+                color: #009999;
+                padding: 5px 25px; /*Größe, Breite,Länge*/
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-family: "Teko";
+                font-size: 20px;
+                text-align:center;
+            }
 
+            input[type=submit]:hover {
+                background-color: white;/*Farbe wenn man über suchebutton fährt*/   
+                color: #48D1CC;
+                border-radius: 5px;
             }
 
     </style>
