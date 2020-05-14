@@ -2,7 +2,7 @@
 	font-family: "Teko";
 	font-size: 20px;
 }
-body {background-color: #009999;
+body {background-color:#009999;
 	animation-name: first;
 	animation-duration: 15s;
 	animation-iteration-count: infinite; /*durchgehend*/
@@ -13,7 +13,15 @@ body {background-color: #009999;
 h1	{color: black;font-size:25px; float: left; font-family: "Teko";}
 
 h2	{color: purple;font-size:14px;font-family: "Teko";}
-a       {color:red;}
+
+a {
+    color: black; /*Details Link farbe*/
+}
+a:hover {
+    background: white;
+    color: #48D1CC; /*Details Link farbe*/
+    
+}
 
 
 @keyframes first{
@@ -28,7 +36,7 @@ a       {color:red;}
 .white {
     padding-top: 25px;
     padding-bottom: 25px;
-    border: 2px solid white;
+    border: 3px solid white;
     overflow: visible;
     border-radius: 5px;
 
@@ -44,8 +52,8 @@ a       {color:red;}
 
 .rechts {
     position:relative;
-    margin-left:640px;
-    top: -135px;
+    margin-left:620px;
+    top: -145px;
 
     
 }
@@ -92,36 +100,43 @@ table{
     position:relative;
     top: -120px;
     left: 0px;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 3px;
+    font-size: 80px;
     
 }
 
+tfoot {
+    background-color: grey;
+    color: white;
+}
 table td, table th{
     padding: 2px 10px;
-    border: 1px solid black;
+    border: none;
     font-size: 10pt;
 
     
 }
 
-table th {
-    background-color: #666;
+ th {
+    background-color: grey;
     color: white;
+    font-size: 100 px;
 }
 
-table tr:nth-child(1n) {
-    background-color: #ccffcc;
+table tr {
+    background-color: #48D1CC;
     color: black;
-}
-
-table tr:nth-child(2n){
-    background-color:#fff5dd;
-    color: black;
+    font-size: 30px;
 }
 
 table tr:hover {
-    background-color: goldenrod;
-    color: white;
+    background-color: white;
+    color: #48D1CC;
+    border: 2px solid black;
 }
+
 
 /*Bild Startseite center position*/
 .flex { 

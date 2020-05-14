@@ -9,11 +9,12 @@
    
 </head>
     <form method="GET" action="ctrlsearchdvd">
-	<input type="text" name="titel" placeholder="Suche...">
+	<input type="text" name="titel" placeholder="Was suchst du?">
         <input type="submit" value="Suche">
     </form>
 
     <table border="1">
+        <thead>
         <tr>
             <th>Titel</th>
             <th>Länge</th>
@@ -21,6 +22,8 @@
             <th>Details</th>
 
         </tr>
+        </thead>
+        <tbody>
         <c:forEach var="dvd" items="${dvdList}">
             <tr>
                 <td>${dvd.titel}</td>
@@ -30,6 +33,12 @@
 
             </tr>
         </c:forEach>
+        </tbody>
+        <tfoot>
+        10   <tr>
+        11     <td colspan="3">Zum Teil [...] neu aufgelegt</td>
+        12   </tr>
+        </tfoot>
 
     </table>
 </body>

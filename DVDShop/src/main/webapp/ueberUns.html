@@ -13,29 +13,133 @@
             }
 
             h1 {
-                margin-top: 2%;
+                position:relative;
+                top: -80px;
                 text-align: center;
                 font-family: "Teko";
                 font-size: 32px;
+                color: white;
             }
             h2 {
+                position:relative;
+                top: -80px;
+                text-align: center;
+                font-family: "Teko";
+                font-size: 26px;
+                color: white;
+            }
+            p {
+                position:relative;
+                top: -90px;
                 text-align: center;
                 font-family: "Teko";
                 font-size: 23px;
-            }
-            p {
-                text-align: center;
-                font-family: "Teko";
-                font-size: 20px;
+                color: white;
             }
             figure {
                 text-align: center;
                 font-family: "Teko";
                 font-size: 16px;
+                color: white;
+                position: relative;
+                display: inline-block;
+                top: -80px;
+                left: 10%;
             }
+            
+              .flex { 
+    left: 35%;
+    width: 6em;
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+    }
+            
+             .white {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border: 2px solid white;
+    overflow: visible;
+    border-radius: 5px;
+
+    }
+
+    .yellow {
+    padding-top: 5px;
+    padding-bottom: 50px;
+    border: 2px solid white;
+    background-color: white;
+    overflow: visible;
+    }
+    
+     li {
+    position:relative;
+    top: -170px; /*Höhe*/
+    left: -40px;
+    list-style-type: none;
+  float: left;
+  font-family: "Teko";
+  font-size: 23px;
+  margin-top: 165px;
+  margin-left: 6px;
+  backround-color: white;
+  overflow: visible;
+}
+
+li a {
+  display: block;
+  color: #009999; /*Farbe Buchstaben*/
+  background-color: white;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+  margin-top: 0px;
+  font-family: "Teko";
+  font-size: 23px;
+  float: left;
+  overflow: visible;
+}
+
+li a:hover {
+   background-color: #48D1CC; /*wenn man über Buttons fährt*/
+  color: white;
+  text-align: center;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block; 
+  font-family: "Teko";
+  font-size: 23px;
+  overflow: visible;
+}
+
+.rechts {
+    position:relative;
+    margin-left:620px;
+    top: -115px;
+    overflow: visible;
+
+    
+}
         </style>
     </head>
     <body>
+         <div class="white">
+            <div class="yellow">
+                <div class="flex">
+                    <img alt="" src="images/logi_hell_copy.png" width="400" height="100">
+                </div>
+                <ul>
+                    <li><a href="ctrlselect">Home</a></li>
+                    <li><a href="ueberUns.html">Unser Team</a></li>
+                    <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
+                    <li><a href="ctrlselectausgeliehen">Meine DVDs</a></li>
+
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+                <li><a href="ctrllogout" class="rechts">LogOut</a></li>
+            </div>
+        </div>
+        
         <h1>Unser Team</h1>
         <h2>Das sind wir !</h2>
         <br><br>
@@ -54,16 +158,17 @@
             Mit großem Engagement und Kompetenz in den Bereichen Film, Fernsehen und Co. entwickeln wir unser Konzept DER modernen und attraktiven 
             Videothek für Sie weiter.
         </p>
+        <br><br><br><br>
         <figure>
-            <img src="images/max.png" width="50" height="200"><br><br><br>
-            <figcaption>Maximilian Buchenr</figcaption>
+            <img src="images/max.jpg" width="250" height="340"><br><br><br>
+            <figcaption>Maximilian Buchner</figcaption>
         </figure>
         <figure>
-            <img src="images/pat.png" width="50" height="200"><br><br><br>
+            <img src="images/pat.jpg" width="250" height="340"><br><br><br>
         <figcaption>Patrick Brzank</figcaption>
         </figure>
         <figure>
-            <img src="images/isabel.png" width="50" height="200"><br><br><br>
+            <img src="images/isabel.jpg" width="250" height="340"><br><br><br>
         <figcaption>Isabel Steinbauer</figcaption>
         </figure>
     </body>

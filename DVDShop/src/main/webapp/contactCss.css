@@ -23,7 +23,8 @@ h1 {color: #009999;
 }
 
 .button:hover {
-  background-color: #48D1CC;
+  background-color: white;
+  color: #009999;
 }
 
 .button.row:after {
