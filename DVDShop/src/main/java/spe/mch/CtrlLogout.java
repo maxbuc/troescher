@@ -8,6 +8,7 @@ package spe.mch;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,14 +35,37 @@ public class CtrlLogout extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {//Abfrage, ob User eingeloggt ist!
+            throws ServletException, IOException {
+        //Abfrage, ob irgendwer eingeloggt ist!
         HttpSession session = request.getSession();
         String sessionid = session.getId();
-        Kunde sessionKunde = null;
-
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-        String sql = "update kunde set sessionId=null where sessionId=?";
+        String check = "select kid from kunde where sessionId=?";
+        int kid = 0;
+        try {
+            PreparedStatement pstm = conn.prepareStatement(check);
+
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            
+            if (rs.next()) {
+                kid = rs.getInt(1);
+
+                if (kid == 0) {
+                    RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                    logInView.forward(request, response);
+                }
+            } else {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
+            }
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+        }
+        
+        RequestDispatcher view=null;
+        String sql = "update kunde set sessionId=null where sessionid=?";
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -49,14 +73,15 @@ public class CtrlLogout extends HttpServlet {
             pstm.executeUpdate();
 
             
-
+            view = request.getRequestDispatcher("loginPage.html");
+            view.forward(request, response);
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
 
         }
-        session.removeAttribute("kunde");
-        RequestDispatcher view = request.getRequestDispatcher("loginPage.html");
-        view.forward(request, response);
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

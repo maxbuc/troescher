@@ -29,10 +29,10 @@
   </div>
    <div class="row">
     <div class="col-25">
-      <label for="lname">E-Mail</label>
+      <label for="email">E-Mail</label>
     </div>
     <div class="col-75">
-      <input type="text" id="lname" name="lastname" placeholder="Ihre E-Mail-Adresse">
+      <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse">
     </div>
   </div>
   <div class="row">
@@ -59,12 +59,32 @@
     </div>
   </div>
   <div class="row">
-      <a href="merci.html" class="button">Abschicken</a>
+      <button onclick="abschicken()">Abschicken</button>
+      <a href="merci.html"  class="button">Abschicken</a>
   </div>
   <div class="row">
       <a href="ctrlselect" class="button button2">Zurück</a>
   </div>
   
 </div>
+                
+                <script>
+                    function abschicken(){
+                        var input = document.getElementById('subject');
+                        inhalt= input.value;
+                        var input = document.getElementById('email');
+                        email= input.value;
+                        var input = document.getElementById('country');
+                        land= input.value;
+                        var input = document.getElementById('fname');
+                        first= input.value;
+                        var input = document.getElementById('lname');
+                        last= input.value;
+                        window.location.href= "mailto:maximilian.buchner@siemens.com?subject=DVD-Shop&body=" + inhalt + "%20von%20"+email+
+                                "%20aus%20"+ land+ "%20Mit%20freundlichen%20Grueßen%20"+first+"%20"+last;
+                        
+                    }
+                </script>
+                
 	</body>
 </html>

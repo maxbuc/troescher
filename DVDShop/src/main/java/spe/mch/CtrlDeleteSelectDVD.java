@@ -66,9 +66,10 @@ public class CtrlDeleteSelectDVD extends HttpServlet {
             response.getWriter().print(ex.getMessage());
         }
 
-        int did = Integer.parseInt(request.getParameter("did"));
-
+        
+        RequestDispatcher view;
         try {
+            int did = Integer.parseInt(request.getParameter("did"));
             String sql = "delete from dvd where did = ?";
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setInt(1, did);
@@ -84,14 +85,19 @@ public class CtrlDeleteSelectDVD extends HttpServlet {
             pstm.setInt(1, did);
             pstm.executeUpdate();
 
-            dbPool.releaseConnection(conn);
-            RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
-            view.forward(request, response);
+            
+            view = request.getRequestDispatcher("ctrlselectadmin");
 
-        } catch (SQLException ex) {
-            response.getWriter().print(ex.getMessage());
+        } catch (Exception ex) {
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {}
+            
+            view = request.getRequestDispatcher("ctrlselectadmin");
+            
         }
-
+        dbPool.releaseConnection(conn);
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

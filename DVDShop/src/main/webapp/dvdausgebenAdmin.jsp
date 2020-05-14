@@ -19,7 +19,7 @@
                     
                 </tr>
             </c:forEach>
-                <tr><th colspan="6"><a href="ctrldvdinsertselect">Add</a></th></tr>  
+                <tr><th colspan="5"><a href="ctrldvdinsertselect">Add</a></th></tr>  
         </table>
     </body>
 </html>

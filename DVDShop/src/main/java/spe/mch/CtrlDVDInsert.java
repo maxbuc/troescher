@@ -72,6 +72,9 @@ public class CtrlDVDInsert extends HttpServlet {
         for(int i = 0; i<sprachen.length;i++){
             sprachenList.add(Integer.parseInt(sprachen[i]));
         }
+        if(sprachenList.get(0)==null){
+            sprachenList.add(1);
+        }
         try {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setString(1, request.getParameter("titel"));
@@ -108,11 +111,10 @@ public class CtrlDVDInsert extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("ctrlselectadmin");
             view.forward(request, response);
         } catch (SQLException ex) {
-            for (int i = 0; i < sprachen.length; i++) {
-                response.getWriter().println(sprachen[i]);
-                
-            }
-            response.getWriter().print(ex.getMessage());
+            
+        }catch(NumberFormatException e){
+            RequestDispatcher view = request.getRequestDispatcher("ctrldvdinsertselect");
+            view.forward(request, response);
         }
     }
 

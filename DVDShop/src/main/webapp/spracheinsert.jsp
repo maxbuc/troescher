@@ -17,7 +17,7 @@
 <form method="POST" action="ctrlspracheinsert">
     <table>
         <tr><form method="POST" action="ctrlspracheinsert">
-            <td><input type="text" name="name" placeholder="Neue Sprache einfügen"></td>
+            <td><input type="text" name="name" placeholder="Neue Sprache einfügen" required="required"></td>
             <td><input type="submit" value="Hinzufügen"></td>
             </tr>
     </table>

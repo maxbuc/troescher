@@ -6,20 +6,20 @@
         <table>
             <tr>
                 <td><label for="titel">Titel:</label></td>
-                <td><input type="text" name="titel" placeholder="Titel eingeben"></td>                        
+                <td><input type="text" name="titel" placeholder="Titel eingeben" required="required"></td>                        
             </tr>
             <tr>
                 <td><label for="laenge">Länge:</label></td>
-                <td><input type="text" name="laenge" placeholder="Länge eingeben"></td>                        
+                <td><input type="number" name="laenge" placeholder="" required="required"></td>                        
             </tr>
             <tr>
                 <td><label for="erscheinungsjahr">Erscheinungsjahr:</label></td>
-                <td><input type="text" name="erscheinungsjahr" placeholder="Jahr eingeben"></td>                        
+                <td><input type="number" name="erscheinungsjahr" placeholder="2020" min="1900" max="2020" required="required"></td>                        
             </tr>
 
             <tr>
                 <td><label for="genre">Genre:</label></td>
-                <td><select name="gid">
+                <td><select name="gid" required="required">
                         <c:forEach var="genre" items="${genreList}">
                             <option value="${genre.number}">${genre.name}</option>
                         </c:forEach>
@@ -27,7 +27,7 @@
             </tr>
 
             <tr>
-                <td><label for="sprache">Sprache:</label></td>
+                <td><label for="sprache">Sprache: (default=deutsch)</label></td>
                 <td>
                     <c:forEach var="sprache" items="${spracheList}">
                         <input type="checkbox" name="sprache" value="${sprache.number}">${sprache.name} </br>
@@ -39,7 +39,7 @@
 
             <tr>
                 <td><label for="fsk">FSK:</label></td>
-                <td><select name="fsk">
+                <td><select name="fsk" required="required">
                         <option value="0">0</option>
                         <option value="6">6</option>
                         <option value="12">12</option>
