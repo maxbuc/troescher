@@ -2,7 +2,6 @@
         <h1>Ihr Gästebucheintrag</h1>
         <form method="POST" action="ctrlupdatekunde">
             <input type="hidden" name="kid" value="${kunde.kid}">
-            <fieldset>
                 <table>
                     <tr>
                         <td><label for="vorname">Vorname:</label></td>
@@ -44,7 +43,6 @@
                     </tr>
                     
                 </table>
-            </fieldset>
         </form>
                     
     </body>

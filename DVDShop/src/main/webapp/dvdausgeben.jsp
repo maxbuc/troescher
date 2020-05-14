@@ -4,9 +4,7 @@
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href=https://fonts.googleapis.com/css?family=Teko">
-    
-   
+    <link rel="stylesheet" href=https://fonts.googleapis.com/css?family=Teko">  
 </head>
     <form method="GET" action="ctrlsearchdvd">
 	<input type="text" name="titel" placeholder="Was suchst du?">
@@ -22,11 +20,6 @@
             <th>Details</th>
         </tr>
         </thead>
-        <tfoot>
-           <tr>
-            <td colspan="3">Zum Teil [...] neu aufgelegt</td>
-           </tr>
-        </tfoot>
         <tbody>
         <c:forEach var="dvd" items="${dvdList}">
             <tr>

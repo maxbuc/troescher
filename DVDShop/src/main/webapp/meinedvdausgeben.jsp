@@ -53,6 +53,6 @@
         </c:forEach>
 
     </table>
-<a href="ctrlselect"  class="button">zurück zur Gesamtübersicht</a>
+<a href="ctrlselect"  class="button">Filmübersicht der Videothek</a>
 </body>
 </html>
