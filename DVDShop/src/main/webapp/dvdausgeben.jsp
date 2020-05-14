@@ -14,7 +14,7 @@
     transition: .5s;
     }
 
-    input[type="text"]{
+    input[type=text]{
         position: relative;
         left: 900px;
         top: -210px;
@@ -32,7 +32,7 @@
         color:white;
     }
 
-    input[type="submit"]{
+    input[type=submit]{
        position: relative;
        left: 900px;
        top: -210px;
@@ -46,7 +46,7 @@
        color: white;
     }
 
-    input[type="submit"]:hover{
+    input[type=submit]:hover{
         background: #48D1CC;
     }
     </style>
