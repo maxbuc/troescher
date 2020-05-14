@@ -53,7 +53,6 @@ public class CtrlLogIn extends HttpServlet {
                 pstm.setString(1, sessionid);
                 pstm.executeUpdate();
 
-                request.setAttribute("kunde", new Kunde(1, "admin@admin.de", "admin"));
 
                 view = request.getRequestDispatcher("ctrlselectadmin");
                 view.forward(request, response);
@@ -72,13 +71,6 @@ public class CtrlLogIn extends HttpServlet {
                 rs.next();
 
                 int kid = rs.getInt("kid");
-                String vorname = rs.getString("vorname");
-                String nachname = rs.getString("nachname");
-                String strasse = rs.getString("strasse");
-                String hausnummer = rs.getString("hausnummer");
-                String plz = rs.getString("plz");
-                String kontonr = rs.getString("kontonr");
-                String email = rs.getString("email");
                 String passwort = rs.getString("passwort");
 
                 if (rs.getString("passwort").equals(mPasswort)) {
@@ -88,9 +80,6 @@ public class CtrlLogIn extends HttpServlet {
                     pstm.setInt(2, kid);
                     pstm.executeUpdate();
 
-                    Kunde kunde = new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort);
-                    kunde.setSessionid(sessionid);
-                    session.setAttribute("kunde", kunde);
 
                     view = request.getRequestDispatcher("ctrlselect");
                 } else {

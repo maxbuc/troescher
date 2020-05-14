@@ -19,13 +19,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Maximilian
  */
-@WebServlet(name = "CtrlRegister", urlPatterns = {"/ctrlregister"})
-public class CtrlRegister extends HttpServlet {
+@WebServlet(name = "CtrlUpdateKundeSelect", urlPatterns = {"/ctrlupdatekundeselect"})
+public class CtrlUpdateKundeSelect extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,47 +39,56 @@ public class CtrlRegister extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Abfrage, ob User eingeloggt ist!
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         ConnectionPool dbPool = (ConnectionPool) getServletContext().getAttribute("dbPool");
         Connection conn = dbPool.getConnection();
-        String sql1 = "select email from kunde";
-        String sql = "insert into kunde(vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort) "
-                + "values (?,?,?,?,?,?,?,?)";
-
+        String check = "select kid from kunde where sessionId=?";
+        int kid = 0;
         try {
-            PreparedStatement check = conn.prepareStatement(sql1);
-            ResultSet rs = check.executeQuery();
-            
+            PreparedStatement pstm = conn.prepareStatement(check);
 
-            PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setString(1, request.getParameter("vorname"));
-            pstm.setString(2, request.getParameter("nachname"));
-            pstm.setString(3, request.getParameter("strasse"));
-            pstm.setString(4, request.getParameter("hausnummer"));
-            pstm.setString(5, request.getParameter("plz"));
-            pstm.setString(6, request.getParameter("kontonr"));
-            pstm.setString(7, request.getParameter("email"));
-            pstm.setString(8, request.getParameter("passwort"));
-            boolean insert= true;
-            while (rs.next()) {
-                if (rs.getString("email").equals(request.getParameter("email"))) {
-                    insert=false;
-                }
+            pstm.setString(1, sessionid);
+            ResultSet rs = pstm.executeQuery();
+            kid = 0;
+            if (rs.next()) {
+                kid = rs.getInt(1);
             }
-            RequestDispatcher view;
-            if(insert){
-                pstm.executeUpdate();
-                view = request.getRequestDispatcher("loginPage.html");
-            }else{
-                view = request.getRequestDispatcher("register_failed.html");
+            if (kid <= 1) {
+                RequestDispatcher logInView = request.getRequestDispatcher("loginPage.html");
+                logInView.forward(request, response);
             }
-
-            dbPool.releaseConnection(conn);
-
-            view.forward(request, response);
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
         }
+        String sql = "select * from kunde where kid=?";
 
+        RequestDispatcher view = null;
+
+        try {
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, kid);
+            ResultSet rs = pstm.executeQuery();
+            rs.next();
+
+            String vorname = rs.getString("vorname");
+            String nachname = rs.getString("nachname");
+            String strasse = rs.getString("strasse");
+            String hausnummer = rs.getString("hausnummer");
+            String plz = rs.getString("plz");
+            String kontonr = rs.getString("kontonr");
+            String email = rs.getString("email");
+            String passwort = rs.getString("passwort");
+
+            request.setAttribute("kunde", new Kunde(kid, vorname, nachname, strasse, hausnummer, plz, kontonr, email, passwort));
+            view = request.getRequestDispatcher("kunde_bearbeiten.jsp");
+
+        } catch (SQLException ex) {
+            response.getWriter().print(ex.getMessage());
+            view = request.getRequestDispatcher("ctrlselect");
+        }
+        view.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
