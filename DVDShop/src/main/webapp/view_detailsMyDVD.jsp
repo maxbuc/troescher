@@ -2,8 +2,8 @@
 <head>
     <style>
         .button {
-        background-color: #009999;
-        color: white;
+        background-color: white;
+        color: #009999;
         padding: 12px 20px;
         border: none;
         border-radius: 4px;
@@ -13,7 +13,7 @@
       }
       .button:hover {
         background-color: white;
-        color: #009999;
+        color: #48D1CC;
       }
       .button.row:after {
         content: "";

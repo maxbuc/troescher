@@ -11,6 +11,10 @@
         }
         
         table{
+            padding-top: 10px;
+                padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10 px;
                 width:60%;
                 position:relative;
                 top: 0px;
@@ -18,9 +22,26 @@
                 font-family: "Teko";
                 font-size: 20px;
                 border: none;
-                
-
             }
+           table td, table th{
+            padding: 10px 20px;
+            border: none;
+            font-size: 17px;
+
+
+        }
+
+        table tr {
+            background-color: #48D1CC;
+            color: black;
+            font-size: 30px;
+        }
+
+        table tr:hover {
+            background-color: white;
+            color: #48D1CC;
+            border: 2px solid black;
+        }
             table.doFixed {
                 table-layout: fixed;
             }
@@ -42,12 +63,12 @@
 
             table th {
                 background-color: #666;
-                color: white;
+                color: black;
             }
               .container {
                 padding: 30px;
                 position: relative;
-                left: 300px;
+                left: 285px;
                 margin-top: 30px;
                 margin-bottom: 60px;
                 border-radius: 5px;
@@ -76,12 +97,12 @@
                 color: #48D1CC;
                 border-radius: 5px;
             }
-            }
-            input[type=submit] /*Button Regestrieren*/{
+            
+            input[type=submit] /*Button Speichern*/{
                 position: relative;
-                bottom: 40px; /*Button ausrichten*/
-                left:580px;
-                width: 10%;
+                top: 100px;
+                left: 150px;
+                width: 20%;
                 background-color: white;
                 color: #009999;
                 padding: 5px 25px; /*Größe, Breite,Länge*/
@@ -98,12 +119,18 @@
                 color: #48D1CC;
                 border-radius: 5px;
             }
+            table tr:hover {
+    background-color: #48D1CC;
+    color: white;
+    
+}
 
     </style>
         <h1>Mein Konto</h1>
         <div class="container">
         <form method="POST" action="ctrlupdatekunde">
             <input type="hidden" name="kid" value="${kunde.kid}">
+            
                 <table height="50%">
                     <tr>
                         <td><label for="vorname">Vorname:</label></td>
@@ -139,10 +166,8 @@
                         <td><label for="passwort">Passwort:</label></td>
                         <td><input type="text" name="passwort" value="${kunde.passwort}" required="required"></td>                        
                      </tr>
-                    <tr>
-                        <td colspan="2"><input type="submit" value="Speichern"></td>
-                    </tr>
                 </table>
+                     <input type="submit" value="Speichern">
         </form>
         </div>
                     

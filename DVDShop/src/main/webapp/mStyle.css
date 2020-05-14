@@ -54,6 +54,7 @@ a:hover {
     position:relative;
     margin-left:620px;
     top: -145px;
+    overflow: visible;
 
     
 }
@@ -69,6 +70,7 @@ li {
   margin-top: 165px;
   margin-left: 6px;
   backround-color: white;
+  overflow: visible;
 }
 
 li a {
@@ -82,6 +84,7 @@ li a {
   font-family: "Teko";
   font-size: 23px;
   float: left;
+  overflow: visible;
 }
 
 li a:hover {
@@ -93,13 +96,14 @@ li a:hover {
   display: block; 
   font-family: "Teko";
   font-size: 23px;
+  overflow: visible;
 }
 
 table{
-    width:100%;
+    
     position:relative;
-    top: -120px;
-    left: 0px;
+    top: -100px;
+    width:100%;
     border: 2px solid white;
     background-color: white;
     border-radius: 3px;
@@ -151,48 +155,6 @@ table tr:hover {
     transform: translate (-50%, -50%);
 }
 
-input {
-    position: relative;
-    display: inline-block;
-    font-size: 20px;
-    box-sizing: border-box;
-    transition: .5s;
-}
 
-input[type="text"]{
-    position: relative;
-    left: 900px;
-    top: -210px;
-    background: grey;
-    color: white;
-    width: 200px;
-    height: 50px;
-    border: none;
-    outline: none;
-    padding: 0 25px;
-    border-radius: 25px 0 0 25px;
-}
-
-::placeholder {
-    color:white;
-}
-
-input[type="submit"]{
-   position: relative;
-   left: 900px;
-   top: -210px;
-   border-radius: 0 25px 25px 0;
-   width: 85px;
-   height: 50px;
-   border: none;
-   outline: none;
-   cursor: pointer;
-   background: #009999;
-   color: white;
-}
-
-input[type="submit"]:hover{
-    background: #48D1CC;
-}
 
 
