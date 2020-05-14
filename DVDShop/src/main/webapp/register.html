@@ -11,255 +11,255 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        
+
         <style>
             body {background-color: #009999;
-	animation-name: first;
-	animation-duration: 15s;
-	animation-iteration-count: infinite; /*durchgehend*/
-	animation-direction: alternate;
-	animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
-	}
-        
-        @keyframes first{
-	0% {background-color: #00C3C3;}
-	25% {background-color: #00A7A7;}
-	50% {background-color: #008A8A;}
-	75% {background-color: #00ACAC;}
-	100% {background-color: #088A85;}
-    }
-    
-    p {
-        font-family: "Teko";
-        font-size: 18px;
-        color:black;
-        position:relative;
-        display: inline-block;
-        margin-top: 15px;
-        left: 28%;
-    }
-    
-    .flex { 
-    left: 35%;
-    width: 6em;
-    position: relative;
-    z-index: 10;
-    }
-        
-        table{
-    width:60%;
-    position:relative;
-    top: 0px;
-    left: 5px;
-    font-family: "Teko";
-    font-size: 20px;
-    
-    }
-    table.doFixed {
-   table-layout: fixed;
-    }
-    /*.doAutoWidth {
-   width: auto;
-}*/
+                  animation-name: first;
+                  animation-duration: 15s;
+                  animation-iteration-count: infinite; /*durchgehend*/
+                  animation-direction: alternate;
+                  animation-fill-mode: backwards; /*Startzustand wird wieder hergestellt*/
+            }
 
-    
-table td {
-    text-align: left;
-}
+            @keyframes first{
+                0% {background-color: #00C3C3;}
+                25% {background-color: #00A7A7;}
+                50% {background-color: #008A8A;}
+                75% {background-color: #00ACAC;}
+                100% {background-color: #088A85;}
+            }
 
-.kleiner {
-    width: 20%;
-}
-.auchKleiner {
-    width: 50%;
-}
+            p {
+                font-family: "Teko";
+                font-size: 18px;
+                color:black;
+                position:relative;
+                display: inline-block;
+                margin-top: 15px;
+                left: 28%;
+            }
 
-table th {
-    background-color: #666;
-    color: white;
-}
+            .flex { 
+                left: 35%;
+                width: 6em;
+                position: relative;
+                z-index: 10;
+            }
+
+            table{
+                width:60%;
+                position:relative;
+                top: 0px;
+                left: 5px;
+                font-family: "Teko";
+                font-size: 20px;
+
+            }
+            table.doFixed {
+                table-layout: fixed;
+            }
+            /*.doAutoWidth {
+           width: auto;
+        }*/
 
 
+            table td {
+                text-align: left;
+            }
 
-    
-    .white {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    border: 2px solid white;
-    overflow: visible;
-    border-radius: 5px;
+            .kleiner {
+                width: 20%;
+            }
+            .auchKleiner {
+                width: 50%;
+            }
 
-    }
+            table th {
+                background-color: #666;
+                color: white;
+            }
 
-    .yellow {
-    padding-top: 5px;
-    padding-bottom: 50px;
-    border: 2px solid white;
-    background-color: white;
-    overflow: visible;
-    }
-    
-    h {
-        position: relative;
-        vertical-align: middle;
-        left: 33%;
-        top: 25px;
-        font-family: "Teko";
-	font-size: 35px;
-    }
-    
-    li {
-    position:relative;
-    top: -170px; /*Höhe*/
-    left: -40px;
-    list-style-type: none;
-  float: left;
-  font-family: "Teko";
-  font-size: 23px;
-  margin-top: 165px;
-  margin-left: 6px;
-  backround-color: white;
-}
 
-li a {
-  display: block;
-  color: #009999; /*Farbe Buchstaben*/
-  background-color: white;
-  text-align: center;
-  padding: 10px 14px;
-  text-decoration: none;
-  margin-top: 0px;
-  font-family: "Teko";
-  font-size: 23px;
-  float: left;
-}
 
-li a:hover {
-   background-color: #48D1CC; /*wenn man über Buttons fährt*/
-  color: white;
-  text-align: center;
-  padding: 10px 14px;
-  text-decoration: none;
-  display: block; 
-  font-family: "Teko";
-  font-size: 23px;
-}
-input {
-  width: 80%;
-  padding: 6px;
-  border: 1px solid black;
-  border-radius: 5px;
-  box-sizing: border-box;
- 
-  
-}
-input[type=submit] /*Button Regestrieren*/{
-   position: relative;
-   bottom: 40px; /*Button ausrichten*/
-   left:580px;
-  width: 10%;
-  background-color: white;
-  color: #009999;
-  padding: 5px 25px; /*Größe, Breite,Länge*/
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Teko";
-  font-size: 20px;
-  text-align:center;
-}
 
-input[type=submit]:hover {
-  background-color: white;/*Farbe wenn man über suchebutton fährt*/   
-  color: #48D1CC;
-  border-radius: 5px;
-}
+            .white {
+                padding-top: 25px;
+                padding-bottom: 25px;
+                border: 2px solid white;
+                overflow: visible;
+                border-radius: 5px;
 
-.container {
-    padding: 30px;
-    position: relative;
-    left: 300px;
-  margin-top: 30px;
-  margin-bottom: 60px;
-  border-radius: 5px;
-  background-color: #48D1CC;
-  border: 2px solid white;
-  width: 50%;
+            }
 
-}
-label {
-    font-size: 20px;
-    
-}
+            .yellow {
+                padding-top: 5px;
+                padding-bottom: 50px;
+                border: 2px solid white;
+                background-color: white;
+                overflow: visible;
+            }
 
-/*Passwort ansehen*/
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  margin-top: 15px;
-  left: 28%;
-  
-}
+            h {
+                position: relative;
+                vertical-align: middle;
+                left: 33%;
+                top: 25px;
+                font-family: "Teko";
+                font-size: 35px;
+            }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+            li {
+                position:relative;
+                top: -170px; /*Höhe*/
+                left: -40px;
+                list-style-type: none;
+                float: left;
+                font-family: "Teko";
+                font-size: 23px;
+                margin-top: 165px;
+                margin-left: 6px;
+                backround-color: white;
+            }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+            li a {
+                display: block;
+                color: #009999; /*Farbe Buchstaben*/
+                background-color: white;
+                text-align: center;
+                padding: 10px 14px;
+                text-decoration: none;
+                margin-top: 0px;
+                font-family: "Teko";
+                font-size: 23px;
+                float: left;
+            }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 23px;/*Kreis*/
-  width: 23px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+            li a:hover {
+                background-color: #48D1CC; /*wenn man über Buttons fährt*/
+                color: white;
+                text-align: center;
+                padding: 10px 14px;
+                text-decoration: none;
+                display: block; 
+                font-family: "Teko";
+                font-size: 23px;
+            }
+            input {
+                width: 80%;
+                padding: 6px;
+                border: 1px solid black;
+                border-radius: 5px;
+                box-sizing: border-box;
 
-input:checked + .slider {
-  background-color: #009999;
-}
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+            }
+            input[type=submit] /*Button Regestrieren*/{
+                position: relative;
+                bottom: 40px; /*Button ausrichten*/
+                left:580px;
+                width: 10%;
+                background-color: white;
+                color: #009999;
+                padding: 5px 25px; /*Größe, Breite,Länge*/
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-family: "Teko";
+                font-size: 20px;
+                text-align:center;
+            }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+            input[type=submit]:hover {
+                background-color: white;/*Farbe wenn man über suchebutton fährt*/   
+                color: #48D1CC;
+                border-radius: 5px;
+            }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 30px;
-}
+            .container {
+                padding: 30px;
+                position: relative;
+                left: 300px;
+                margin-top: 30px;
+                margin-bottom: 60px;
+                border-radius: 5px;
+                background-color: #48D1CC;
+                border: 2px solid white;
+                width: 50%;
 
-.slider.round:before {
-  border-radius: 50%;
-}
+            }
+            label {
+                font-size: 20px;
+
+            }
+
+            /*Passwort ansehen*/
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 30px;
+                margin-top: 15px;
+                left: 28%;
+
+            }
+
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 23px;/*Kreis*/
+                width: 23px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #009999;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 30px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
 
         </style>
     </head>
     <body>
-                <div class="white">
+        <div class="white">
             <div class="yellow">
                 <div class="flex">
                     <img alt="" src="images/logi_hell_copy.png" width="400" height="100">
@@ -271,110 +271,72 @@ input:checked + .slider:before {
             </div>
         </div>
         <div class="container">
-        <div class="white2"></div>
-        <form method="POST" action="ctrlselect">
-           
-            <table width="50%">
-                <tr>
-<<<<<<< HEAD
-                    <td class="kleiner"><label for="vorname">Vorname:</label></td>
-                    <td class="auchKleiner"><input type="text" name="vorname" placeholder="Vorname"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="nachname">Nachname:</label></td>
-                    <td class="auchKleiner"><input type="text" name="nachname" placeholder="Nachname"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="strasse">Straße:</label></td>
-                    <td class="auchKleiner"><input type="text" name="strasse" placeholder="Straße"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="hausnummer">Hausnummer:</label></td>
-                    <td class="auchKleiner"><input type="text" name="hausnummer" placeholder="Hausnummer"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="plz">PLZ:</label></td>
-                    <td class="auchKleiner"><input type="text" name="plz" placeholder="PLZ"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="kontonr">Kontonummer:</label></td>
-                    <td class="auchKleiner"><input type="text" name="kontonr" placeholder="Kontonummer"></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="email">E-Mail-Adresse:</label></td>
-                    <td class="auchKleiner"><input type="email" name="email" placeholder="max@mustermann.de"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="kleiner"><label for="passwort">Passwort:</label></td>
-                    <td class="auchKleiner"><input type="password" name="passwort" ></td>
-=======
-                    <td><label for="vorname">Vorname:*</label></td>
-                    <td><input type="text" name="vorname" placeholder="Vorname" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="nachname">Nachname:*</label></td>
-                    <td><input type="text" name="nachname" placeholder="Nachname" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="strasse">Straße:*</label></td>
-                    <td><input type="text" name="strasse" placeholder="Straße" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="hausnummer">Hausnummer:*</label></td>
-                    <td><input type="text" name="hausnummer" placeholder="Hausnummer" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="plz">PLZ:*</label></td>
-                    <td><input type="text" name="plz" placeholder="PLZ" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="kontonr">Kontonummer:*</label></td>
-                    <td><input type="text" name="kontonr" placeholder="Kontonummer" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">E-Mail-Adresse:*</label></td>
-                    <td><input type="email" name="email" placeholder="max@mustermann.de" required="required"></td>
-                </tr>
-                <tr>
-                    <td><label for="passwort">Passwort:*</label></td>
-                    <td><input type="password" name="passwort" required="required"></td>
->>>>>>> b0bed1782ee4dfc92c636f6f90a2f024d8e2111a
-                </tr>
-                <!--<tr>
-                    <td colspan="2"></td>
-                </tr>-->
-            </table>
-<<<<<<< HEAD
- 
-=======
-                    
-                </div>
-            </div>
-            <input type="submit" value="Registrieren">
->>>>>>> b0bed1782ee4dfc92c636f6f90a2f024d8e2111a
-        </form>
-        <label class="switch">
-                        <input type="checkbox" onclick="myFunction()">
-                        <span class="slider round"></span>
-                    </label>
-                    <p>Passwort ansehen</p>
-                    <p></p>
-                    <p></p>
+            <div class="white2"></div>
+            <form method="POST" action="ctrllogin">
 
-                                <script>
-                                    function myFunction() {
-                                      var x = document.getElementById("myInput");
-                                      if (x.type === "password") {
-                                        x.type = "text";
-                                      } else {
-                                        x.type = "password";
-                                      }
-                                    }
-                                </script>
+                <table width="50%">
+                    <tr>
+
+                        <td class="kleiner"><label for="vorname">Vorname:</label></td>
+                        <td class="auchKleiner"><input type="text" name="vorname" placeholder="Vorname" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="nachname">Nachname:</label></td>
+                        <td class="auchKleiner"><input type="text" name="nachname" placeholder="Nachname" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="strasse">Straße:</label></td>
+                        <td class="auchKleiner"><input type="text" name="strasse" placeholder="Straße" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="hausnummer">Hausnummer:</label></td>
+                        <td class="auchKleiner"><input type="text" name="hausnummer" placeholder="Hausnummer" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="plz">PLZ:</label></td>
+                        <td class="auchKleiner"><input type="text" name="plz" placeholder="PLZ" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="kontonr">Kontonummer:</label></td>
+                        <td class="auchKleiner"><input type="text" name="kontonr" placeholder="Kontonummer" required></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="email">E-Mail-Adresse:</label></td>
+                        <td class="auchKleiner"><input type="email" name="email" placeholder="max@mustermann.de" required></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="kleiner"><label for="passwort">Passwort:</label></td>
+                        <td class="auchKleiner"><input type="password" name="passwort" required></td>
+                    </tr>
+
+
+                </table>
+
+                <input type="submit" value="Registrieren">
+
+            </form>
+            <label class="switch">
+                <input type="checkbox" onclick="myFunction()">
+                <span class="slider round"></span>
+            </label>
+            <p>Passwort ansehen</p>
+            <p></p>
+            <p></p>
+
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("myInput");
+                    if (x.type === "password") {
+                        x.type = "text";
+                    } else {
+                        x.type = "password";
+                    }
+                }
+            </script>
         </div>
-        
+
     </body>
 </html>
