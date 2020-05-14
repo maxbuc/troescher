@@ -1,90 +1,95 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>Kontaktseite</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="contactCss.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
-	</head>
-	<body>
-		<h1>Unser Kontaktformular</h1>
-		<div class="container">
-  <form action="/action_page.php">
-  <div class="row">
-    <div class="col-25">
-      <label for="fname">Vorname</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="fname" name="firstname" placeholder="Ihr Vorname">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="lname">Nachname</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="lname" name="lastname" placeholder="Ihr Nachname">
-    </div>
-  </div>
-   <div class="row">
-    <div class="col-25">
-      <label for="email">E-Mail</label>
-    </div>
-    <div class="col-75">
-      <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="country">Land</label>
-    </div>
-    <div class="col-75">
-      <select id="country" name="country">
-          <option value="germany">Deutschland</option>
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
-        <option value="spain">Spanien</option>
-        <option value="italy">Italien</option>
-      </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="subject">Benachrichtigung</label>
-    </div>
-    <div class="col-75">
-      <textarea id="subject" name="subject" placeholder="Ihre Nachricht an unser Team" style="height:150px"></textarea>
-    </div>
-  </div>
-  <div class="row">
-      <button onclick="abschicken()">Abschicken</button>
-      <a href="merci.html"  class="button">Abschicken</a>
-  </div>
-  <div class="row">
-      <a href="ctrlselect" class="button button2">Zurück</a>
-  </div>
-  
-</div>
-                
-                <script>
-                    function abschicken(){
-                        var input = document.getElementById('subject');
-                        inhalt= input.value;
-                        var input = document.getElementById('email');
-                        email= input.value;
-                        var input = document.getElementById('country');
-                        land= input.value;
-                        var input = document.getElementById('fname');
-                        first= input.value;
-                        var input = document.getElementById('lname');
-                        last= input.value;
-                        window.location.href= "mailto:maximilian.buchner@siemens.com?subject=DVD-Shop&body=" + inhalt + "%20von%20"+email+
-                                "%20aus%20"+ land+ "%20Mit%20freundlichen%20Grueßen%20"+first+"%20"+last;
-                        
-                    }
-                </script>
-                
-	</body>
+        <title>Kontaktseite</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="contactCss.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko">
+    </head>
+    <body>
+        <h1>Unser Kontaktformular</h1>
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="fname">Vorname</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="fname" name="firstname" placeholder="Ihr Vorname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="lname">Nachname</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lname" name="lastname" placeholder="Ihr Nachname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="email">E-Mail</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" id="email" name="email" placeholder="Ihre E-Mail-Adresse" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="country">Land</label>
+                    </div>
+                    <div class="col-75">
+                        <select id="country" name="country">
+                            <option value="germany">Deutschland</option>
+                            <option value="australia">Australia</option>
+                            <option value="canada">Canada</option>
+                            <option value="usa">USA</option>
+                            <option value="spain">Spanien</option>
+                            <option value="italy">Italien</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="subject">Benachrichtigung</label>
+                    </div>
+                    <div class="col-75">
+                        <textarea id="subject" name="subject" placeholder="Ihre Nachricht an unser Team" style="height:150px" ></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <a href="merci.html" onclick="abschicken()" class="button">Abschicken</a>
+                </div>
+                <div class="row">
+                    <a href="ctrlselect" class="button button2">Zurück</a>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            function abschicken() {
+                var input = document.getElementById('subject');
+                mInhalt = input.value;
+                mInhalt2 = mInhalt.replace(" ", "%20");
+                inhalt = mInhalt2.replace(/\n/g, "%0D%0A");
+                inhalt = inhalt.replace(/"/g, "%22");
+                inhalt = inhalt.replace(/;/g, "%3B");
+                inhalt = inhalt.replace(/+/g, "%2B");
+                var input = document.getElementById('email');
+                email = input.value;
+                var input = document.getElementById('country');
+                land = input.value;
+                var input = document.getElementById('fname');
+                first = input.value;
+                var input = document.getElementById('lname');
+                last = input.value;
+                window.location.href = "mailto:maximilian.buchner@siemens.com,patrik.brzank@siemens.com,isabel.steinbauer@siemens.com"
+                        + "?subject=DVD-Shop-Kontakt&body=E%2DMail%20von%20"
+                        + first + "%20" + last + "%20mit%20der%20Mailadresse%20%20" + email + "%0D%0A" + inhalt;
+
+            }
+        </script>
+
+    </body>
 </html>

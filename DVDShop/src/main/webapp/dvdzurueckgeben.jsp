@@ -18,6 +18,6 @@
 
     </table>
         
-        
+        <a href="ctrlselectadmin">zurück zur Gesamtübersicht</a>
     </body>
 </html>
