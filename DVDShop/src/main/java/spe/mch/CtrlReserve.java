@@ -69,7 +69,7 @@ public class CtrlReserve extends HttpServlet {
             pstm.setInt(2, kid);
             pstm.executeUpdate();
 
-            RequestDispatcher view = request.getRequestDispatcher("ctrlselect");
+            RequestDispatcher view = request.getRequestDispatcher("ctrlselectausgeliehen");
             view.forward(request, response);
         } catch (SQLException ex) {
             response.getWriter().print(ex.getMessage());
