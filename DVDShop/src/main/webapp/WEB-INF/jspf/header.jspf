@@ -24,15 +24,9 @@
                 
                 <ul>
                     <li><a href="ctrlselect">Home</a></li>
-<<<<<<< HEAD
                     <li><a href="ueberUns.html">Unser Team</a></li>
-                    <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>
-=======
-                    <li><a href="ueberUns.html">Über uns</a></li>
-                    <li><a href="ctrlupdatekundeselect">Mein Konto</a></li>
->>>>>>> b0bed1782ee4dfc92c636f6f90a2f024d8e2111a
+                    <li><a href="kunde_bearbeiten.jsp">Mein Konto</a></li>    
                     <li><a href="ctrlselectausgeliehen">Meine DVDs</a></li>
-
                     <li><a href="contact.html">Kontakt</a></li>
                     
                 </ul>  

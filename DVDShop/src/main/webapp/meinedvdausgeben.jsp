@@ -6,6 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href=https://fonts.googleapis.com/css?family=Teko">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    
+    <style>
+
+        .button {
+        background-color: #009999;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+        margin-top: -100px;
+      }
+
+      .button:hover {
+        background-color: white;
+        color: #009999;
+      }
+
+      .button.row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
    
 </head>
     
@@ -28,6 +53,6 @@
         </c:forEach>
 
     </table>
-<a href="ctrlselect">zurück zur Gesamtübersicht</a>
+<a href="ctrlselect"  class="button">zurück zur Gesamtübersicht</a>
 </body>
 </html>

@@ -20,9 +20,13 @@
             <th>Länge</th>
             <th>FSK</th>
             <th>Details</th>
-
         </tr>
         </thead>
+        <tfoot>
+           <tr>
+            <td colspan="3">Zum Teil [...] neu aufgelegt</td>
+           </tr>
+        </tfoot>
         <tbody>
         <c:forEach var="dvd" items="${dvdList}">
             <tr>
@@ -30,16 +34,9 @@
                 <td>${dvd.laenge}</td>
                 <td>${dvd.fsk}</td>
                 <td><a href="ctrlselectdetail?did=${dvd.did}">Details</a></td>
-
             </tr>
         </c:forEach>
-        </tbody>
-        <tfoot>
-        10   <tr>
-        11     <td colspan="3">Zum Teil [...] neu aufgelegt</td>
-        12   </tr>
-        </tfoot>
-
+        </tbody>        
     </table>
 </body>
 </html>
