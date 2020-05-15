@@ -46,7 +46,7 @@
     }
     </style>
 </head>
-    <form method="GET" action="ctrlsearchdvd">
+    <form method="GET" action="ctrlsearchdvdadmin">
 	<input type="text" name="titel" placeholder="Was suchst du?">
         <input type="submit" value="Suche">
     </form>
